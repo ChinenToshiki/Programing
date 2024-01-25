@@ -13,7 +13,7 @@ private:
 	float speed;					//速さ
 	float hp;						//体力
 	float fuel;						//燃料
-	int baarrier_count;				//バリアの枚数
+	int barrier_count;				//バリアの枚数
 	Barrier* barrier;				//バリア
 
 public:
