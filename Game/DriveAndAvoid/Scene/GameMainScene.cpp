@@ -149,3 +149,78 @@ void GameMainScene::Draw() const
 	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetHp() * 100 / 1000), fy + 40.0f, GetColor(255, 0, 0), TRUE);
 	DrawBoxAA(fx, fy + 20.0f, fx + 100.0f, fy+40.0f, GetColor(0, 0, 0), FALSE);
 }
+
+void GameMainScene::Finalize()
+{
+	int score = (mileage / 10 * 10);
+	for (int i = 0; i < 3; i++)
+	{
+		score += (i + 1) * 50 * enemy_count[i];
+	}
+
+	FILE* fp = nullptr;
+
+	errno_t result = fopen_s(&fp, "Resource/dat/result_data.csv", "w");
+
+	if (result != 0)
+	{
+		throw("Resource / dat / result_data.csv‚ªŠJ‚¯‚Ü‚¹‚ñ");
+	}
+
+	fprintf(fp, "%d\n", score);
+
+	for (int i = 0; i < 3; i++)
+	{
+		fprintf(fp, "%d,\n", enemy_count[i]);
+	}
+
+	fclose(fp);
+
+	player->Finallize();
+	delete player;
+
+	for (int i = 0; i < 10; i++)
+	{
+		if (enemy[i] != nullptr)
+		{
+			enemy[i]->Finalize();
+			delete enemy[i];
+			enemy[i] = nullptr;
+		}
+	}
+	delete[] enemy;
+}
+
+eSceneType GameMainScene::GetNowScene() const
+{
+	return eSceneType::E_MAIN;
+}
+
+void GameMainScene::ReadHighScore()
+{
+	RankingData data;
+	data.Initalize();
+
+	high_score = data.GetScore(0);
+
+	data.Finalize();
+}
+
+bool GameMainScene::IsHitCheck(Player* p, Enemy* e)
+{
+	if (p->IsBarrier())
+	{
+		return false;
+	}
+
+	if (e == nullptr)
+	{
+		return false;
+	}
+
+	Vector2D diff_location = p->GetLocation() - e->GetLocation();
+
+	Vector2D box_ex = p->GetBoxSize() + e->GetBoxSize();
+
+	return ((fabsf(diff_location.x) < box_ex.x) && (fabsf(diff_location.y) < box_ex.y));
+}

@@ -141,7 +141,6 @@
     <ClCompile Include="Scene\RankingDispScene.cpp" />
     <ClCompile Include="Scene\RankingInputScene.cpp" />
     <ClCompile Include="Scene\ResultScene.cpp" />
-    <ClCompile Include="Scene\SceneBase.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
     <ClCompile Include="Utility\InputControl.cpp" />
