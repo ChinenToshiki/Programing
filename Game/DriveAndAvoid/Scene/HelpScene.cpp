@@ -13,10 +13,10 @@ HelpScene:: ~HelpScene()
 }
 
 void HelpScene::Initialize()
-{
+{								
 	background_image = LoadGraph("Resource/images/Title.bmp");
 
-	if (background_image = -1)
+	if (background_image == -1)
 	{
 		throw("Resource/images/Title.bmp‚ª‚ ‚è‚Ü‚¹‚ñ\n");
 	}

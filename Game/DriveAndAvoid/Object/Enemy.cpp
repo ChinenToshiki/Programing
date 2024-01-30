@@ -26,7 +26,7 @@ void Enemy::Update(float speed)
 
 void Enemy::Draw() const
 {
-	DrawRotaGraphF(location.x, location.y, 10, 0.0, image, TRUE);
+	DrawRotaGraphF(location.x, location.y, 1.0, 0.0, image, TRUE);
 }
 
 void Enemy::Finalize()

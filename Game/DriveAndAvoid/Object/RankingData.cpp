@@ -33,7 +33,7 @@ void RankingData::Initalize()
 
 	for (int i = 0; i < 5; i++)
 	{
-		fscanf_s(fp, "%6d,%2d,%[^,],\n", &score[i], &rank[i], name[i], 15);
+		fscanf_s(fp, "%d,%d,%[^,],\n", &score[i], &rank[i], name[i], 15);
 	}
 
 	fclose(fp);
@@ -117,7 +117,7 @@ void RankingData::SortData()
 
 	for (int i = 0; i < 5; i++)
 	{
-		fprintf(fp, "%d,%d,%s,\n", score[i], rank[i], name[i] );
+		fprintf(fp, "%d,%d,%s,\n", score[i], rank[i], name[i]);
 	}
 	fclose(fp);
 }

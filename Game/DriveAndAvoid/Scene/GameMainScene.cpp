@@ -21,9 +21,9 @@ void GameMainScene::Initialize()
 {
 	ReadHighScore();
 
-	back_ground = LoadGraph("Resource/images/back.bmp");
-	barrier_image = LoadGraph("Resoure/images/barrier.png");
-	int result = LoadDivGraph("Resoure/images/car.bmp", 3, 3, 1, 63, 120, enemy_image);
+	back_ground = LoadGraph  ("Resource/images/back.bmp");
+	barrier_image = LoadGraph("Resource/images/barrier.png");
+	int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120, enemy_image);
 
 	if (back_ground == -1)
 	{
@@ -90,6 +90,7 @@ eSceneType GameMainScene::Update()
 				player->DecreaseHp(-50.0f);
 				enemy[i]->Finalize();
 				delete enemy[i];
+				enemy[i] = nullptr;
 			}
 		}
 	}
@@ -134,7 +135,7 @@ void GameMainScene::Draw() const
 
 	for (int i = 0; i < player->GetBarrierCount(); i++)
 	{
-		DrawRotaGraph(520, i*25, 340, 0.2f, 0, barrier_image, TRUE, FALSE);
+		DrawRotaGraph(520+ i*25, 340, 0.2f, 0, barrier_image, TRUE, FALSE);
 	}
 
 	float fx = 510.0f;

@@ -34,6 +34,15 @@ void ResultScene::Initialize()
 	ReadResultData();
 }
 
+eSceneType ResultScene::Update()
+{
+	if (InputControl::GetButtonDown(XINPUT_BUTTON_B))
+	{
+		return eSceneType::E_RANKING_INPUT;
+	}
+	return GetNowScene();
+}
+
 void ResultScene::Draw() const
 {
 	DrawGraph(0, 0, back_ground, TRUE);
@@ -68,8 +77,26 @@ void ResultScene::Finalize()
 
 eSceneType ResultScene::GetNowScene() const
 {
+	return eSceneType::E_RESULT;
+}
+
+
+void ResultScene::ReadResultData()
+{
 	FILE* fp = nullptr;
 	errno_t result = fopen_s(&fp, "Resource/dat/result_data.csv", "r");
 
 	//エラーチェック
+	if (result != 0)
+	{
+		throw("Resource/dat/result_data.csvが読み込めません\n");
+	}
+
+	fscanf_s(fp, "%6d,\n", &score);
+
+	for (int i = 0; i < 3; i++)
+	{
+		fscanf_s(fp, "%6d,\n", &enemy_count[i]);
+	}
+	fclose(fp);
 }
