@@ -70,8 +70,8 @@ void RankingInputScene::Draw() const
 		y = ((i / 13) + 2) * font_size + 300;
 		DrawFormatString(x, y, GetColor(255, 255, 255), " % -3c", 'A' + i);
 	}
-	DrawString(40, 405, "åàíË", GetColor(255, 255, 255));
-	DrawString(40 + font_size * 2, 405, "è¡Ç∑", GetColor(255, 255, 255));
+	DrawString(40, 405, "åàíË", GetColor(0, 255, 255));
+	DrawString(40 + font_size * 2, 405, "è¡Ç∑", GetColor(255, 0, 0));
 
 	if (cursor_y < 4)
 	{
@@ -85,9 +85,9 @@ void RankingInputScene::Draw() const
 		{
 			DrawBox(35, 400, 35 + font_size * 2, 400 + font_size, GetColor(255, 255, 255), FALSE);
 		}
-		else
+		else if(cursor_x == 1)
 		{
-			DrawBox(0, 0, font_size, font_size, GetColor(255, 255, 255), FALSE);
+			DrawBox(85, 400, 85 + font_size * 2, 400 + font_size, GetColor(255, 255, 255), FALSE);
 		}
 	}
 }
@@ -117,11 +117,17 @@ bool RankingInputScene::InputName()
 		else
 		{
 			cursor_x = 12;
+		}		
+		if (cursor_y == 4)
+		{
+				cursor_x = 0;
 		}
+
 	}
 
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_DPAD_RIGHT))
 	{
+
 		if (cursor_x < 12)
 		{
 			cursor_x++;
@@ -129,6 +135,11 @@ bool RankingInputScene::InputName()
 		else
 		{
 			cursor_x = 0;
+		}
+		if (cursor_y == 4)
+		{
+				cursor_x = 1;
+
 		}
 	}
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_DPAD_UP))

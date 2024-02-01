@@ -20,7 +20,7 @@ Barrier::~Barrier()
 
 void Barrier::Draw(const Vector2D& location)
 {
-	DrawRotaGraph(location.x, location.y, 10, 0.0, image, TRUE);
+	DrawRotaGraph(location.x, location.y, 1.0, 0.0, image, TRUE);
 }
 
 bool Barrier::IsFinished(float speed)
