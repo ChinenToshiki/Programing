@@ -20,6 +20,7 @@ RankingData::~RankingData()
 
 }
 
+//初期化処理
 void RankingData::Initalize()
 {
 	FILE* fp = nullptr;
@@ -43,11 +44,13 @@ void RankingData::Initalize()
 	name[5][0] = '\0';
 }
 
+//終了処理
 void RankingData::Finalize()
 {
 
 }
 
+//データ設定処理
 void RankingData::SetRankingData(int score, const char* name)
 {
 	this->score[5] = score;
@@ -55,22 +58,22 @@ void RankingData::SetRankingData(int score, const char* name)
 
 	SortData();
 }
-
+//スコア取得処理
 int RankingData::GetScore(int value) const
 {
 	return score[value];
 }
-
+//ランク取得処理
 int RankingData::GetRank(int value) const
 {
 	return rank[value];
 }
-
+//名前取得処理
 const char* RankingData::GetName(int value)const
 {
 	return name[value];
 }
-
+//データ入れ替え処理
 void RankingData::SortData()
 {
 	for (int i = 0; i < 5; i++)

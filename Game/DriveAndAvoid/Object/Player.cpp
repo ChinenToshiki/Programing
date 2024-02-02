@@ -12,6 +12,7 @@ Player::~Player()
 
 }
 
+//初期化処理
 void Player::Initialize()
 {
 	is_active = true;
@@ -23,16 +24,22 @@ void Player::Initialize()
 	fuel = 20000;
 	barrier_count = 3;
 
+	//画像読み込み
 	image = LoadGraph("Resource/images/car1pol.bmp");
 
+	//エラーチェック
 	if (image == -1)
 	{
 		throw("Resource/images/car1pol.bmpがありません\n");
 	}
 }
 
+
+//更新処理
 void Player::Update()
 {
+
+	//操作不可状態であれば、自身を回転させる
 	if (!is_active)
 	{
 		angle += DX_PI_F / 24.0f;
@@ -44,10 +51,13 @@ void Player::Update()
 		return;
 	}
 
+	//燃料の消費
 	fuel -= speed;
 
+	//移動処理
 	Movement();
 
+	//加減速処理
 	Acceleration();
 
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_START))
@@ -55,6 +65,7 @@ void Player::Update()
 		is_active = false;
 	}
 
+	//バリア処理
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_B) && barrier_count > 0)
 	{
 		if (barrier == nullptr)
@@ -64,6 +75,7 @@ void Player::Update()
 		}
 	}
 	
+	//バリアが生成されていたら、更新を行う
 	if (barrier != nullptr)
 	{
 		if (barrier->IsFinished(this->speed))
@@ -74,6 +86,7 @@ void Player::Update()
 	}
 }
 
+//描画処理
 void Player::Draw()
 {
 	DrawRotaGraphF(location.x, location.y, 1.0, angle, image, TRUE);
@@ -84,6 +97,7 @@ void Player::Draw()
 	}
 }
 
+//終了処理
 void Player::Finallize()
 {
 	DeleteGraph(image);
@@ -94,51 +108,61 @@ void Player::Finallize()
 	}
 }
 
+//状態設定処理
 void Player::SetActive(bool flg)
 {
 	this->is_active = flg;
 }
 
+//体力減少処理
 void Player::DecreaseHp(float value)
 {
 	this->hp += value;
 }
 
+//位置情報取得処理
 Vector2D Player::GetLocation() const
 {
 	return this->location;
 }
 
+//当たり判定の大きさを取得処理
 Vector2D Player::GetBoxSize() const
 {
 	return this->box_size;
 }
 
+//速さ取得処理
 float Player::GetSpeed() const
 {
 	return this->speed;
 }
 
+//燃料取得処理
 float Player::GetFuel() const
 {
 	return this->fuel;
 }
 
+//体力取得処理
 float Player::GetHp() const
 {
 	return this->hp;
 }
 
+//バリア枚数取得処理
 int Player::GetBarrierCount() const
 {
 	return this->barrier_count;
 }
 
+//バリア有効か？を取得
 bool Player::IsBarrier() const
 {
 	return (barrier != nullptr);
 }
 
+//移動処理
 void Player::Movement()
 {
 	Vector2D move = Vector2D(0.0f);
@@ -171,6 +195,7 @@ void Player::Movement()
 	}
 }
 
+//加減速処理
 void Player::Acceleration()
 {
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_LEFT_SHOULDER) && speed > 1.0f)
