@@ -18,10 +18,13 @@ SceneManager::~SceneManager()
 
 }
 
+//シーンマネージャー機能:初期化処理
 void SceneManager::Initialize()
 {
+	//ウィンドウのタイトルを設定
 	SetMainWindowText("Drive&Avoid");
 
+	//ウィンドウモードで起動
 	if (ChangeWindowMode(TRUE) != DX_CHANGESCREEN_OK)
 	{
 		throw("ウィンドウモードで起動できませんでした\n");
@@ -37,24 +40,33 @@ void SceneManager::Initialize()
 		throw("描画先の指定ができませんでした\n");
 	}
 
+	//タイトルシーンへ飛ぶ
 	ChangeScene(eSceneType::E_TITLE);
 }
 
+//シーンマネージャー機能:更新
 void SceneManager::Update()
 {
+	//フレーム開始時間(マイクロ秒)を取得
 	LONGLONG start_time = GetNowHiPerformanceCount();
 
+	//メインループ
 	while (ProcessMessage() != -1)
 	{
+		//現在時間
 		LONGLONG now_time = GetNowHiPerformanceCount();
 
+		//1フレーム当たりの時間に達したら更新と描画
 		if ((now_time - start_time) >= DELTA_SECOND)
 		{
 
+			//フレーム開始時間の更新
 			start_time = now_time;
 
+			//入力処理:更新
 			InputControl::Update();
-
+			
+			//更新処理
 			eSceneType next = current_scene->Update();
 
 			Draw();

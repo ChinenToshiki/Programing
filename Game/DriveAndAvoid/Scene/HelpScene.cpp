@@ -12,6 +12,7 @@ HelpScene:: ~HelpScene()
 
 }
 
+//初期化処理
 void HelpScene::Initialize()
 {								
 	background_image = LoadGraph("Resource/images/Title.bmp");
@@ -22,8 +23,10 @@ void HelpScene::Initialize()
 	}
 }
 
+//更新処理
 eSceneType HelpScene::Update()
 {
+	//Bボタンが押されたらタイトルに戻る
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_B))
 	{
 		return eSceneType::E_TITLE;
@@ -32,10 +35,13 @@ eSceneType HelpScene::Update()
 	return GetNowScene();
 }
 
+//描画処理
 void HelpScene::Draw() const
 {
+	//背景画像の描画
 	DrawGraph(0, 0, background_image, FALSE);
 
+	//ゲーム説明
 	SetFontSize(16);
 	DrawString(20, 120, "ヘルプ画面",0xffffff,0);
 
@@ -47,11 +53,13 @@ void HelpScene::Draw() const
 	DrawString(20, 450, "----　Bボタンを押してタイトルに戻る　----", 0xffffff, 0);
 }
 
+//終了時処理
 void HelpScene::Finalize()
 {
 	DeleteGraph(background_image);
 }
 
+//現在のシーンを取得
 eSceneType HelpScene::GetNowScene() const
 {
 	return eSceneType::E_HELP;

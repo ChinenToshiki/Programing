@@ -17,8 +17,10 @@ ResultScene::~ResultScene()
 
 }
 
+//初期化処理
 void ResultScene::Initialize()
 {
+	//画像の読み込み
 	back_ground = LoadGraph("Resource/images/back.bmp");
 	int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120, enemy_image);
 
@@ -31,11 +33,14 @@ void ResultScene::Initialize()
 		throw("Resource/images/back.bmpがありません\n");
 	}
 
+	//ゲーム結果の読み込み
 	ReadResultData();
 }
 
+//更新処理
 eSceneType ResultScene::Update()
 {
+	//Bボタンでランキングに飛ぶ
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_B))
 	{
 		return eSceneType::E_RANKING_INPUT;
@@ -43,10 +48,13 @@ eSceneType ResultScene::Update()
 	return GetNowScene();
 }
 
+//描画処理
 void ResultScene::Draw() const
 {
+	//背景の描画
 	DrawGraph(0, 0, back_ground, TRUE);
 
+	//スコア等表示領域
 	DrawBox(150, 150, 490, 330, GetColor(0, 153, 0), TRUE);
 	DrawBox(150, 150, 490, 330, GetColor(0, 0, 0), FALSE);
 
@@ -67,6 +75,7 @@ void ResultScene::Draw() const
 	DrawFormatString(180, 290, 0xFFFFFFF, "        =%6d", score);
 }
 
+//終了時処理
 void ResultScene::Finalize()
 {
 	DeleteGraph(back_ground);
@@ -76,14 +85,16 @@ void ResultScene::Finalize()
 	}
 }
 
+//現在のシーン情報を取得
 eSceneType ResultScene::GetNowScene() const
 {
 	return eSceneType::E_RESULT;
 }
 
-
+//リザルトデータの読み込み
 void ResultScene::ReadResultData()
 {
+	//ファイルオープン
 	FILE* fp = nullptr;
 	errno_t result = fopen_s(&fp, "Resource/dat/result_data.csv", "r");
 
@@ -93,8 +104,10 @@ void ResultScene::ReadResultData()
 		throw("Resource/dat/result_data.csvが読み込めません\n");
 	}
 
+	//結果を読み込む
 	fscanf_s(fp, "%6d,\n", &score);
 
+	//避けた数と得点を取得
 	for (int i = 0; i < 3; i++)
 	{
 		fscanf_s(fp, "%6d,\n", &enemy_count[i]);
