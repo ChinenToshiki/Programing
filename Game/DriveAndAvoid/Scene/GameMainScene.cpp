@@ -45,9 +45,11 @@ void GameMainScene::Initialize()
 	//オブジェクトの生成
 	player = new Player;
 	enemy = new Enemy * [10];
+	charges = new Charges;
 
 	//オブジェクトの初期化
 	player->Initialize();
+	charges->Initialize();
 
 	for (int i = 0; i < 10; i++)
 	{
@@ -60,6 +62,8 @@ eSceneType GameMainScene::Update()
 {
 	//プレイヤーの更新
 	player->Update();
+
+	charges->Update(player->GetHp());
 
 	//移動距離の更新
 	mileage += (int)player->GetSpeed() + 5;
@@ -106,7 +110,9 @@ eSceneType GameMainScene::Update()
 			}
 		}
 	}
-
+	if (charges->GetOnce()) {
+		return eSceneType::E_RESULT;
+	}
 	//プレイヤーの燃料or体力が0未満ならリザルトへ飛ぶ
 	if (player->GetFuel() < 0.0f || player->GetHp() < 0.0f)
 	{
@@ -119,6 +125,10 @@ eSceneType GameMainScene::Update()
 //描画処理
 void GameMainScene::Draw() const
 {
+	if (charges->GetChargesFlg()) {
+		charges->Draw();
+		return;
+	}
 	//背景描画
 	DrawGraph(0, mileage % 480 - 480, back_ground, TRUE);
 	DrawGraph(0, mileage % 480, back_ground, TRUE);
@@ -131,7 +141,6 @@ void GameMainScene::Draw() const
 			enemy[i]->Draw();
 		}
 	}
-
 	//プレイヤーの描画
 	player->Draw();
 
@@ -172,11 +181,19 @@ void GameMainScene::Draw() const
 	DrawFormatStringF(fx, fy, GetColor(0, 0, 0), "PLAYER HP");
 	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetHp() * 100 / 1000), fy + 40.0f, GetColor(255, 0, 0), TRUE);
 	DrawBoxAA(fx, fy + 20.0f, fx + 100.0f, fy+40.0f, GetColor(0, 0, 0), FALSE);
+
 }
 
 //終了時処理
 void GameMainScene::Finalize()
 {
+	if (charges->GetChargesFlg()) {
+		mileage = 0;
+		for (int i = 0; i < 3; i++) {
+			enemy_count[i] = 0;
+		}
+	}
+
 	//スコア計算
 	int score = (mileage / 10 * 10);
 	for (int i = 0; i < 3; i++)
@@ -211,6 +228,9 @@ void GameMainScene::Finalize()
 	//動的確保したオブジェクトを削除する
 	player->Finallize();
 	delete player;
+
+	charges->Finalize();
+	delete charges;
 
 	for (int i = 0; i < 10; i++)
 	{
