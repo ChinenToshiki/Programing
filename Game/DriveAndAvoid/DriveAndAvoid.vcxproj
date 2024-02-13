@@ -136,6 +136,7 @@
     <ClCompile Include="Object\Enemy.cpp" />
     <ClCompile Include="Object\Player.cpp" />
     <ClCompile Include="Object\RankingData.cpp" />
+    <ClCompile Include="Scene\Charges.cpp" />
     <ClCompile Include="Scene\GameMainScene.cpp" />
     <ClCompile Include="Scene\HelpScene.cpp" />
     <ClCompile Include="Scene\RankingDispScene.cpp" />
@@ -143,7 +144,7 @@
     <ClCompile Include="Scene\ResultScene.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
-    <ClCompile Include="Scene\Charges.cpp" />
+    <ClCompile Include="Object\Trial.cpp" />
     <ClCompile Include="Utility\InputControl.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +152,7 @@
     <ClInclude Include="Object\Enemy.h" />
     <ClInclude Include="Object\Player.h" />
     <ClInclude Include="Object\RankingData.h" />
+    <ClInclude Include="Scene\Charges.h" />
     <ClInclude Include="Scene\GameMainScene.h" />
     <ClInclude Include="Scene\HelpScene.h" />
     <ClInclude Include="Scene\RankingDispScene.h" />
@@ -159,7 +161,7 @@
     <ClInclude Include="Scene\SceneBase.h" />
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="Scene\TitleScene.h" />
-    <ClInclude Include="Scene\Charges.h" />
+    <ClInclude Include="Object\Trial.h" />
     <ClInclude Include="Utility\InputControl.h" />
     <ClInclude Include="Utility\Vector2D.h" />
   </ItemGroup>
