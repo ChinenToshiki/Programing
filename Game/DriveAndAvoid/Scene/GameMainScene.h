@@ -3,6 +3,7 @@
 #include"SceneBase.h"
 #include"../Object/Player.h"
 #include"../Object/Enemy.h"
+#include "../Object/Trial.h"
 #include"Charges.h"
 
 class GameMainScene :public SceneBase
@@ -14,9 +15,13 @@ private:
 	int mileage;
 	int enemy_image[3];
 	int enemy_count[3];
+
+	bool hit;
+
 	Player* player;
 	Enemy** enemy;
 	Charges* charges;
+	Trial* trial;
 
 public:
 	GameMainScene();
