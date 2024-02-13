@@ -11,7 +11,7 @@ public:
 	~Charges();
 
 	void Initialize();				//初期化処理
-	void Update(int player_hp);		//更新処理
+	void Update();		//更新処理
 	void Draw() const;				//描画処理
 	void Finalize();				//終了中
 

@@ -63,7 +63,7 @@ eSceneType GameMainScene::Update()
 	//プレイヤーの更新
 	player->Update();
 
-	charges->Update(player->GetHp());
+	charges->Update();
 
 	//移動距離の更新
 	mileage += (int)player->GetSpeed() + 5;

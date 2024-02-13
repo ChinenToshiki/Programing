@@ -21,7 +21,7 @@ void Charges::Initialize()
 	once = false;
 }
 
-void Charges::Update(int player_hp)
+void Charges::Update()
 {
 	//Ù”»ãŒÀ‚ğ‰z‚µ‚½ê‡‚Å‰æ‘œ•\¦(‰¼‚ÅHP‚ğQÆ’†)
 	if (count >= Limit)
