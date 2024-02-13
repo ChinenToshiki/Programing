@@ -102,7 +102,7 @@ eSceneType GameMainScene::Update()
 			//“–‚½‚è”»’è‚ÌŠm”F
 			if (IsHitCheck(player, enemy[i]))
 			{
-				charges->JudgmentCount();//Ù”»‰ñ”‰ÁZ
+				charges->HitCount();//Ù”»‰ñ”‰ÁZ
 				player->SetActive(false);
 				player->DecreaseHp(-50.0f);
 				enemy[i]->Finalize();
@@ -184,7 +184,6 @@ void GameMainScene::Draw() const
 	DrawFormatStringF(fx, fy, GetColor(0, 0, 0), "PLAYER HP");
 	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetHp() * 100 / 1000), fy + 40.0f, GetColor(255, 0, 0), TRUE);
 	DrawBoxAA(fx, fy + 20.0f, fx + 100.0f, fy+40.0f, GetColor(0, 0, 0), FALSE);
-
 }
 
 //I—¹ˆ—

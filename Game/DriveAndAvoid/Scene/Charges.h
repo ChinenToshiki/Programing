@@ -2,10 +2,14 @@
 class Charges
 {
 private:
-	int count;		//裁判を受けた回数をカウント
+	int fps;		//フレーム
+	int judgment_count;//裁判を受けた回数をカウント
+	int count;		//車とぶつかった回数をカウント
 	int image;		//画像用
+
 	bool image_flg; //画像用フラグ
-	bool once;		//ボタンを押したか
+	bool once;		//一度だけの処理用
+	bool fps_flg;	//fps用フラグ
 public:
 	Charges();
 	~Charges();
@@ -17,6 +21,8 @@ public:
 
 	//裁判加算
 	void JudgmentCount() { count += 1; }
+
+	void HitCount();
 
 	//フラグを取得
 	bool GetChargesFlg() { return image_flg; }
