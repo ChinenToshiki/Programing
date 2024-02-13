@@ -63,7 +63,7 @@ eSceneType GameMainScene::Update()
 	//プレイヤーの更新
 	player->Update();
 
-	charges->Update(player->GetHp());
+	charges->Update();
 
 	//移動距離の更新
 	mileage += (int)player->GetSpeed() + 5;
@@ -102,6 +102,7 @@ eSceneType GameMainScene::Update()
 			//当たり判定の確認
 			if (IsHitCheck(player, enemy[i]))
 			{
+				charges->HitCount();//裁判回数加算
 				player->SetActive(false);
 				player->DecreaseHp(-50.0f);
 				enemy[i]->Finalize();
@@ -110,6 +111,7 @@ eSceneType GameMainScene::Update()
 			}
 		}
 	}
+	//死刑判決描画中にボタンが押されてたらリザルトへ
 	if (charges->GetOnce()) {
 		return eSceneType::E_RESULT;
 	}
@@ -125,6 +127,7 @@ eSceneType GameMainScene::Update()
 //描画処理
 void GameMainScene::Draw() const
 {
+	//死刑判決描画
 	if (charges->GetChargesFlg()) {
 		charges->Draw();
 		return;
@@ -181,7 +184,6 @@ void GameMainScene::Draw() const
 	DrawFormatStringF(fx, fy, GetColor(0, 0, 0), "PLAYER HP");
 	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetHp() * 100 / 1000), fy + 40.0f, GetColor(255, 0, 0), TRUE);
 	DrawBoxAA(fx, fy + 20.0f, fx + 100.0f, fy+40.0f, GetColor(0, 0, 0), FALSE);
-
 }
 
 //終了時処理
