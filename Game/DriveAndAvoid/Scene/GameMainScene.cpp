@@ -102,6 +102,7 @@ eSceneType GameMainScene::Update()
 			//“–‚½‚è”»’è‚ÌŠm”F
 			if (IsHitCheck(player, enemy[i]))
 			{
+				charges->JudgmentCount();//Ù”»‰ñ”‰ÁZ
 				player->SetActive(false);
 				player->DecreaseHp(-50.0f);
 				enemy[i]->Finalize();
@@ -110,6 +111,7 @@ eSceneType GameMainScene::Update()
 			}
 		}
 	}
+	//€ŒY”»Œˆ•`‰æ’†‚Éƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚½‚çƒŠƒUƒ‹ƒg‚Ö
 	if (charges->GetOnce()) {
 		return eSceneType::E_RESULT;
 	}
@@ -125,6 +127,7 @@ eSceneType GameMainScene::Update()
 //•`‰æˆ—
 void GameMainScene::Draw() const
 {
+	//€ŒY”»Œˆ•`‰æ
 	if (charges->GetChargesFlg()) {
 		charges->Draw();
 		return;
