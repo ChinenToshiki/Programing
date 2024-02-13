@@ -3,6 +3,7 @@
 #include"SceneBase.h"
 #include"../Object/Player.h"
 #include"../Object/Enemy.h"
+#include"Charges.h"
 
 class GameMainScene :public SceneBase
 {
@@ -15,6 +16,7 @@ private:
 	int enemy_count[3];
 	Player* player;
 	Enemy** enemy;
+	Charges* charges;
 
 public:
 	GameMainScene();
