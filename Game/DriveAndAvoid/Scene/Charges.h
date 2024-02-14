@@ -3,7 +3,7 @@ class Charges
 {
 private:
 	int fps;		//フレーム
-	int judgment_count;//裁判を受けた回数をカウント
+	int trial_count;//裁判を受けた回数をカウント
 	int count;		//車とぶつかった回数をカウント
 	int image;		//画像用
 
@@ -28,6 +28,6 @@ public:
 	bool GetChargesFlg() { return image_flg; }
 	void SetChargesFlg(bool flg) { image_flg = flg; }
 	bool GetOnce() { return  once; }
-
+	int GetTiralCount() { return trial_count; }
 };
 
