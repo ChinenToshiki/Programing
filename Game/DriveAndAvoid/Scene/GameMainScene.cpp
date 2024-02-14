@@ -103,9 +103,11 @@ eSceneType GameMainScene::Update()
 			//当たり判定の確認
 			if (IsHitCheck(player, enemy[i]))
 			{
+				//リムジンじゃなかったら
 				if (enemy[i]->GetType() != 3) {
 					charges->HitCount();//裁判回数加算
 				}
+				//リムジンだったら即死刑
 				else {
 					charges->SetChargesFlg(true);
 				}	
@@ -160,16 +162,22 @@ void GameMainScene::Draw() const
 	DrawFormatString(560, 40, GetColor(255, 255, 255), "%08d", high_score);
 	DrawFormatString(510, 80, GetColor(0, 0, 0), "避けた数");
 
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < ENEMY_NUM; i++)
 	{
-		DrawRotaGraph(523 + (i * 50), 120, 0.3, 0, enemy_image[i], TRUE, FALSE);
-		DrawFormatString(510 + (i * 50), 140, GetColor(255, 255, 255), "%03d", enemy_count[i]);
+		if (i != 3) {
+			DrawRotaGraph(523 + (i * 50), 120, 0.3, 0, enemy_image[i], TRUE, FALSE);
+			DrawFormatString(510 + (i * 50), 140, GetColor(255, 255, 255), "%03d", enemy_count[i]);
+		}
+		else {
+			DrawRotaGraph(523, 190, 0.2, 0, enemy_image[3], FALSE, FALSE);
+			DrawFormatString(510, 215, GetColor(255, 255, 255), "%03d", enemy_count[3]);
+		}
 	}
 
-	DrawFormatString(510, 200, GetColor(0, 0, 0), "走行距離");
-	DrawFormatString(555, 220, GetColor(255, 255, 255), "%08d", mileage / 10);
-	DrawFormatString(510, 240, GetColor(0, 0, 0), "スピード");
-	DrawFormatString(555, 260, GetColor(255, 255, 255), "%08.1f",player->GetSpeed());
+	DrawFormatString(510, 230, GetColor(0, 0, 0), "走行距離");
+	DrawFormatString(555, 250, GetColor(255, 255, 255), "%08d", mileage / 10);
+	DrawFormatString(510, 270, GetColor(0, 0, 0), "スピード");
+	DrawFormatString(555, 290, GetColor(255, 255, 255), "%08.1f",player->GetSpeed());
 
 	//バリア枚数の描画
 	for (int i = 0; i < player->GetBarrierCount(); i++)
