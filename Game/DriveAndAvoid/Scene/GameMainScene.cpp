@@ -5,7 +5,7 @@
 
 GameMainScene::GameMainScene() :high_score(0), back_ground(NULL), barrier_image(NULL), mileage(0), player(nullptr), enemy(nullptr),charges(nullptr)
 {
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < ENEMY_NUM; i++)
 	{
 		enemy_image[i] = NULL;
 		enemy_count[i] = NULL;
@@ -27,7 +27,8 @@ void GameMainScene::Initialize()
 	back_ground = LoadGraph  ("Resource/images/back.bmp");
 	barrier_image = LoadGraph("Resource/images/barrier.png");
 	int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120, enemy_image);
-
+	enemy_image[3] = LoadGraph("Resource/images/limousine.png");
+	//enemy_count[3] = 0;
 	//エラーチェック
 	if (back_ground == -1)
 	{
@@ -75,7 +76,7 @@ eSceneType GameMainScene::Update()
 		{
 			if (enemy[i] == nullptr)
 			{
-				int type = GetRand(3) % 3;
+				int type = GetRand(4) % 4;
 				enemy[i] = new Enemy(type, enemy_image[type]);
 				enemy[i]->Initialize();
 				break;
@@ -102,7 +103,14 @@ eSceneType GameMainScene::Update()
 			//当たり判定の確認
 			if (IsHitCheck(player, enemy[i]))
 			{
-				charges->HitCount();//裁判回数加算
+				//リムジンじゃなかったら
+				if (enemy[i]->GetType() != 3) {
+					charges->HitCount();//裁判回数加算
+				}
+				//リムジンだったら即死刑
+				else {
+					charges->SetChargesFlg(true);
+				}	
 				player->SetActive(false);
 				player->DecreaseHp(-50.0f);
 				enemy[i]->Finalize();
@@ -154,16 +162,22 @@ void GameMainScene::Draw() const
 	DrawFormatString(560, 40, GetColor(255, 255, 255), "%08d", high_score);
 	DrawFormatString(510, 80, GetColor(0, 0, 0), "避けた数");
 
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < ENEMY_NUM; i++)
 	{
-		DrawRotaGraph(523 + (i * 50), 120, 0.3, 0, enemy_image[i], TRUE, FALSE);
-		DrawFormatString(510 + (i * 50), 140, GetColor(255, 255, 255), "%03d", enemy_count[i]);
+		if (i != 3) {
+			DrawRotaGraph(523 + (i * 50), 120, 0.3, 0, enemy_image[i], TRUE, FALSE);
+			DrawFormatString(510 + (i * 50), 140, GetColor(255, 255, 255), "%03d", enemy_count[i]);
+		}
+		else {
+			DrawRotaGraph(523, 190, 0.2, 0, enemy_image[3], FALSE, FALSE);
+			DrawFormatString(510, 215, GetColor(255, 255, 255), "%03d", enemy_count[3]);
+		}
 	}
 
-	DrawFormatString(510, 200, GetColor(0, 0, 0), "走行距離");
-	DrawFormatString(555, 220, GetColor(255, 255, 255), "%08d", mileage / 10);
-	DrawFormatString(510, 240, GetColor(0, 0, 0), "スピード");
-	DrawFormatString(555, 260, GetColor(255, 255, 255), "%08.1f",player->GetSpeed());
+	DrawFormatString(510, 230, GetColor(0, 0, 0), "走行距離");
+	DrawFormatString(555, 250, GetColor(255, 255, 255), "%08d", mileage / 10);
+	DrawFormatString(510, 270, GetColor(0, 0, 0), "スピード");
+	DrawFormatString(555, 290, GetColor(255, 255, 255), "%08.1f",player->GetSpeed());
 
 	//バリア枚数の描画
 	for (int i = 0; i < player->GetBarrierCount(); i++)
@@ -191,14 +205,14 @@ void GameMainScene::Finalize()
 {
 	if (charges->GetChargesFlg()) {
 		mileage = 0;
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < ENEMY_NUM; i++) {
 			enemy_count[i] = 0;
 		}
 	}
 
 	//スコア計算
 	int score = (mileage / 10 * 10);
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < ENEMY_NUM; i++)
 	{
 		score += (i + 1) * 50 * enemy_count[i];
 	}
@@ -219,7 +233,7 @@ void GameMainScene::Finalize()
 	fprintf(fp, "%d\n", score);
 
 	//避けた数と得点の保存
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < ENEMY_NUM; i++)
 	{
 		fprintf(fp, "%d,\n", enemy_count[i]);
 	}
