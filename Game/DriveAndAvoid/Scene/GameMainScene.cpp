@@ -5,7 +5,7 @@
 
 GameMainScene::GameMainScene() :high_score(0), back_ground(NULL), barrier_image(NULL), mileage(0), player(nullptr), enemy(nullptr),charges(nullptr)
 {
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < ENEMY_NUM; i++)
 	{
 		enemy_image[i] = NULL;
 		enemy_count[i] = NULL;
@@ -27,7 +27,8 @@ void GameMainScene::Initialize()
 	back_ground = LoadGraph  ("Resource/images/back.bmp");
 	barrier_image = LoadGraph("Resource/images/barrier.png");
 	int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120, enemy_image);
-
+	enemy_image[3] = LoadGraph("Resource/images/limousine.png");
+	//enemy_count[3] = 0;
 	//エラーチェック
 	if (back_ground == -1)
 	{
@@ -75,7 +76,7 @@ eSceneType GameMainScene::Update()
 		{
 			if (enemy[i] == nullptr)
 			{
-				int type = GetRand(3) % 3;
+				int type = 3;//GetRand(4) % 4;
 				enemy[i] = new Enemy(type, enemy_image[type]);
 				enemy[i]->Initialize();
 				break;
@@ -191,14 +192,14 @@ void GameMainScene::Finalize()
 {
 	if (charges->GetChargesFlg()) {
 		mileage = 0;
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < ENEMY_NUM; i++) {
 			enemy_count[i] = 0;
 		}
 	}
 
 	//スコア計算
 	int score = (mileage / 10 * 10);
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < ENEMY_NUM; i++)
 	{
 		score += (i + 1) * 50 * enemy_count[i];
 	}
@@ -219,7 +220,7 @@ void GameMainScene::Finalize()
 	fprintf(fp, "%d\n", score);
 
 	//避けた数と得点の保存
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < ENEMY_NUM; i++)
 	{
 		fprintf(fp, "%d,\n", enemy_count[i]);
 	}

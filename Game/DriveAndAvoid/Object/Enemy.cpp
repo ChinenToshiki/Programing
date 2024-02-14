@@ -16,10 +16,17 @@ void Enemy::Initialize()
 {
 	//oŒ»‚³‚¹‚é‚˜À•W
 	float random_x = (float)(GetRand(4) * 105 + 40);
-	//¶¬ˆÊ’u‚ÌÝ’è
-	location = Vector2D(random_x, -50.0f);
 	//“–‚½‚è”»’è‚ÌÝ’è
-	box_size = Vector2D(31.0f, 60.0f);
+	if (type != 3) {
+		box_size = Vector2D(31.0f, 60.0f);
+		//¶¬ˆÊ’u‚ÌÝ’è
+		location = Vector2D(random_x, -50.0f);
+	}
+	else {
+		box_size = Vector2D(31.0f, 104.0f);
+		//¶¬ˆÊ’u‚ÌÝ’è
+		location = Vector2D(random_x, -100.0f);
+	}
 	//‘¬‚³‚ÌÝ’è
 	speed = (float)(this->type * 2);
 }
@@ -28,13 +35,20 @@ void Enemy::Update(float speed)
 {
 	//ˆÊ’uî•ñ‚ÉˆÚ“®—Ê‚ð‰ÁŽZ‚·‚é
 	location += Vector2D(0.0f, this->speed + speed - 6);
+
 }
 
 void Enemy::Draw() const
 {
 	//“G‰æ‘œ‚Ì•`‰æ
-	DrawRotaGraphF(location.x, location.y, 1.0, 0.0, image, TRUE);
+	if (type != 3) {
+		DrawRotaGraphF(location.x, location.y, 1.0, 0.0, image, TRUE);
+	}
+	else {
+		DrawRotaGraphF(location.x, location.y, 1.0, 0.0, image, FALSE);
+	}
 }
+	
 
 void Enemy::Finalize()
 {
