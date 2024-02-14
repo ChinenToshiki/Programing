@@ -175,15 +175,15 @@ void GameMainScene::Draw() const
 		}
 	}
 
-	DrawFormatString(510, 230, GetColor(0, 0, 0), "走行距離");
-	DrawFormatString(555, 250, GetColor(255, 255, 255), "%08d", mileage / 10);
-	DrawFormatString(510, 270, GetColor(0, 0, 0), "スピード");
-	DrawFormatString(555, 290, GetColor(255, 255, 255), "%08.1f",player->GetSpeed());
+	DrawFormatString(510, 250, GetColor(0, 0, 0), "走行距離");
+	DrawFormatString(555, 270, GetColor(255, 255, 255), "%08d", mileage / 10);
+	DrawFormatString(510, 290, GetColor(0, 0, 0), "スピード");
+	DrawFormatString(555, 310, GetColor(255, 255, 255), "%08.1f",player->GetSpeed());
 
 	//バリア枚数の描画
 	for (int i = 0; i < player->GetBarrierCount(); i++)
 	{
-		DrawRotaGraph(520+ i*25, 340, 0.2f, 0, barrier_image, TRUE, FALSE);
+		//DrawRotaGraph(520+ i*25, 340, 0.2f, 0, barrier_image, TRUE, FALSE);
 	}
 
 	//燃料ゲージの描画

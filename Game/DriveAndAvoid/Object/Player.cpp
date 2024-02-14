@@ -66,7 +66,7 @@ void Player::Update()
 	}
 
 	//バリア処理
-	if (InputControl::GetButtonDown(XINPUT_BUTTON_B) && barrier_count > 0)
+	/*if (InputControl::GetButtonDown(XINPUT_BUTTON_B) && barrier_count > 0)
 	{
 		if (barrier == nullptr)
 		{
@@ -74,7 +74,7 @@ void Player::Update()
 			barrier = new Barrier;
 		}
 	}
-	
+	*/
 	//バリアが生成されていたら、更新を行う
 	if (barrier != nullptr)
 	{
@@ -93,7 +93,7 @@ void Player::Draw()
 
 	if (barrier != nullptr)
 	{
-		barrier->Draw(this->location);
+		//barrier->Draw(this->location);
 	}
 }
 
