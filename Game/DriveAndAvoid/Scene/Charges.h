@@ -26,7 +26,7 @@ public:
 
 	//ƒtƒ‰ƒO‚ğæ“¾
 	bool GetChargesFlg() { return image_flg; }
-	void SetChargesFlg(bool flg) { image_flg = flg; }
+	void SetChargesFlg(bool flg) { image_flg = flg, fps_flg = false; }
 	bool GetOnce() { return  once; }
 	int GetTiralCount() { return trial_count; }
 };
