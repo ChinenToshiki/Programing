@@ -66,7 +66,11 @@ void Charges::Draw() const
 		//DrawString(SCREEN_WIDTH / 2, SCREEN_HIGHT / 2, "éÄåY", GetColor(255, 0, 0));
 		DrawGraph(30, 0, image, FALSE);
 	}
-	DrawFormatString(100, 100, GetColor(255, 255, 255), "%d", fps);
+	if (fps_flg == true) {
+		DrawBox(5, 5, 150, 40, GetColor(255, 0, 0), TRUE);
+		DrawString(15, 15, "åªç›é∑çsóPó\íÜ", 0x00000);
+	}
+	//DrawFormatString(100, 100, GetColor(255, 255, 255), "%d", fps);
 }
 
 void Charges::Finalize()
