@@ -167,16 +167,35 @@ void Player::Movement()
 {
 	Vector2D move = Vector2D(0.0f);
 	angle = 0.0f;
+	if (InputControl::GetLeftStick().x > 0.3f)
+	{
+		move += Vector2D(1.0f,0.0f);
+		angle = DX_PI_F / 18;
+
+	}
+	if (InputControl::GetLeftStick().x < -0.3f)
+	{
+		move += Vector2D (-1.0f,0.0f);
+		angle = -DX_PI_F / 18;
+	}
+	if (InputControl::GetLeftStick().y > 0.3f)
+	{
+		move += Vector2D(0.0f,-1.0f);
+	}
+	if (InputControl::GetLeftStick().y < -0.3f)
+	{
+		move += Vector2D(0.0f,1.0f);
+	}
 
 	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_LEFT))
 	{
 		move += Vector2D(-1.0f, 0.0f);
-		angle = -DX_PI_F / 18;
+		angle = DX_PI_F / 18;
 	}
 	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_RIGHT))
 	{
 		move += Vector2D(1.0f, 0.0f);
-		angle = DX_PI_F / 18;
+		angle = -DX_PI_F / 18;
 	}
 	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_UP))
 	{
@@ -198,12 +217,12 @@ void Player::Movement()
 //‰ÁŒ¸‘¬ˆ—
 void Player::Acceleration()
 {
-	if (InputControl::GetButtonDown(XINPUT_BUTTON_LEFT_SHOULDER) && speed > 1.0f)
+	if (InputControl::GetButton(XINPUT_BUTTON_LEFT_SHOULDER) && speed > 1.0f)
 	{
 		speed -= 1.0f;
 	}
-	if (InputControl::GetButtonDown(XINPUT_BUTTON_RIGHT_SHOULDER) && speed < 10.0f)
+	if (InputControl::GetButton(XINPUT_BUTTON_RIGHT_SHOULDER) && speed < 15.0f)
 	{
-		speed += 1.0f;
+			speed += 1.0f;
 	}
 }
