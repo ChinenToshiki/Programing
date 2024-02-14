@@ -1,4 +1,10 @@
 q ‚ ‚ ‚ ‚ ‚ ‚ ‚ ‚ 
 s aaaaaaaaaaa
 s aaaaaaaa
-A aaaaaaaaa
+A 0
+
+q ‚¢‚¢‚¢‚¢‚¢‚¢‚¢
+s wwwwwwww
+s tttttttt
+s uuuuuuuu
+A 2

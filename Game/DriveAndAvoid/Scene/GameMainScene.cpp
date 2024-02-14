@@ -131,9 +131,10 @@ eSceneType GameMainScene::Update()
 	else
 	{
 		trial->Update();
-		if (trial->GetVictoryOrDefeat())
+		if (trial->GetEnd())
 		{
 			hit = false;
+			delete trial;
 		}
 	}
 
