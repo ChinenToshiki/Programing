@@ -5,7 +5,7 @@
 
 ResultScene::ResultScene() : back_ground(NULL), score(0)
 {
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < ENEMY_NUM; i++)
 	{
 		enemy_image[i] = NULL;
 		enemy_count[i] = NULL;
@@ -23,6 +23,7 @@ void ResultScene::Initialize()
 	//画像の読み込み
 	back_ground = LoadGraph("Resource/images/back.bmp");
 	int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120, enemy_image);
+	enemy_image[3] = LoadGraph("Resource/images/limousine.png");
 
 	if (back_ground == -1)
 	{
@@ -55,8 +56,8 @@ void ResultScene::Draw() const
 	DrawGraph(0, 0, back_ground, TRUE);
 
 	//スコア等表示領域
-	DrawBox(150, 150, 490, 330, GetColor(0, 153, 0), TRUE);
-	DrawBox(150, 150, 490, 330, GetColor(0, 0, 0), FALSE);
+	DrawBox(150, 150, 490, 370, GetColor(0, 153, 0), TRUE);
+	DrawBox(150, 150, 490, 370, GetColor(0, 0, 0), FALSE);
 
 	DrawBox(500, 0, 640, 480, GetColor(0, 153, 0), TRUE);
 
@@ -64,15 +65,20 @@ void ResultScene::Draw() const
 	DrawString(220, 170, "ゲームオーバー", GetColor(204, 0, 0));
 	SetFontSize(16);
 	DrawString(180, 200, "走行距離       ", GetColor(0, 0, 0));
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < ENEMY_NUM; i++)
 	{
-		DrawRotaGraph(230, 230 + (i * 20), 0.3f, DX_PI_F / 2, enemy_image[i], TRUE);
+		if (i == 3) {
+			DrawRotaGraph(220, 230 + (i * 20), 0.3f, DX_PI_F / 2, enemy_image[3], FALSE);
+		}
+		else {
+			DrawRotaGraph(230, 230 + (i * 20), 0.3f, DX_PI_F / 2, enemy_image[i], TRUE);
+		}
 		DrawFormatString(260, 222 + (i * 21), GetColor(255, 255, 255), "%6d x %4d=%6d",
-			enemy_count[i], (i + 1) * 50, (i + 1) * 50 * enemy_count[i]);
+		enemy_count[i], (i + 1) * 50, (i + 1) * 50 * enemy_count[i]);
 	}
-	DrawString(180, 290, "スコア", GetColor(0, 0, 0));
+	DrawString(180, 320, "スコア", GetColor(0, 0, 0));
 
-	DrawFormatString(180, 290, 0xFFFFFFF, "        =%6d", score);
+	DrawFormatString(180, 320, 0xFFFFFFF, "        =%6d", score);
 }
 
 //終了時処理
@@ -108,7 +114,7 @@ void ResultScene::ReadResultData()
 	fscanf_s(fp, "%6d,\n", &score);
 
 	//避けた数と得点を取得
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < ENEMY_NUM; i++)
 	{
 		fscanf_s(fp, "%6d,\n", &enemy_count[i]);
 	}

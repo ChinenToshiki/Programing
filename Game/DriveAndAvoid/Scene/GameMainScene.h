@@ -1,10 +1,10 @@
 #pragma once
-
 #include"SceneBase.h"
 #include"../Object/Player.h"
 #include"../Object/Enemy.h"
 #include "../Object/Trial.h"
 #include"Charges.h"
+#include"../Object/Trial.h"
 
 class GameMainScene :public SceneBase
 {
@@ -13,9 +13,8 @@ private:
 	int back_ground;
 	int barrier_image;
 	int mileage;
-	int enemy_image[3];
-	int enemy_count[3];
-
+	int enemy_image[ENEMY_NUM];
+	int enemy_count[ENEMY_NUM];
 	bool hit;
 
 	Player* player;

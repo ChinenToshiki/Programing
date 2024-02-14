@@ -1,14 +1,14 @@
 #pragma once
 
 #include"SceneBase.h"
-
+#include"../Object/Trial.h"
 class ResultScene : public SceneBase
 {
 private:
 	int back_ground;
 	int score;
-	int enemy_count[3];
-	int enemy_image[3];
+	int enemy_count[ENEMY_NUM];
+	int enemy_image[ENEMY_NUM];
 
 public:
 	ResultScene();
