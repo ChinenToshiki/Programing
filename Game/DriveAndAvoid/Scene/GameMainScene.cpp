@@ -76,7 +76,7 @@ eSceneType GameMainScene::Update()
 		{
 			if (enemy[i] == nullptr)
 			{
-				int type = 3;//GetRand(4) % 4;
+				int type = GetRand(4) % 4;
 				enemy[i] = new Enemy(type, enemy_image[type]);
 				enemy[i]->Initialize();
 				break;
@@ -103,7 +103,12 @@ eSceneType GameMainScene::Update()
 			//“–‚½‚è”»’è‚ÌŠm”F
 			if (IsHitCheck(player, enemy[i]))
 			{
-				charges->HitCount();//Ù”»‰ñ”‰ÁŽZ
+				if (enemy[i]->GetType() != 3) {
+					charges->HitCount();//Ù”»‰ñ”‰ÁŽZ
+				}
+				else {
+					charges->SetChargesFlg(true);
+				}	
 				player->SetActive(false);
 				player->DecreaseHp(-50.0f);
 				enemy[i]->Finalize();

@@ -26,6 +26,7 @@ public:
 
 	//ƒtƒ‰ƒO‚ğæ“¾
 	bool GetChargesFlg() { return image_flg; }
+	void SetChargesFlg(bool flg) { image_flg = flg; }
 	bool GetOnce() { return  once; }
 
 };

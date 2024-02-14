@@ -77,7 +77,7 @@ void Charges::Finalize()
 void Charges::HitCount()
 {
 	// クールタイム開始と裁判のカウントを増加
+	count += 1;
 	fps_flg = true;
 	judgment_count += 1;
-	count += 1;
 }
