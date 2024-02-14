@@ -114,7 +114,7 @@ void ResultScene::ReadResultData()
 	fscanf_s(fp, "%6d,\n", &score);
 
 	//”ğ‚¯‚½”‚Æ“¾“_‚ğæ“¾
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < ENEMY_NUM; i++)
 	{
 		fscanf_s(fp, "%6d,\n", &enemy_count[i]);
 	}
