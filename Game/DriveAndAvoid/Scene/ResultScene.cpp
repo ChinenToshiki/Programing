@@ -82,8 +82,10 @@ void ResultScene::Draw() const
 
 	DrawFormatString(180, 320, 0xFFFFFFF, "        =%6d", score);
 
-	DrawFormatString(180, 340, GetColor(0, 0, 0), "裁判の結果:\n起きた裁判の数:%2d,勝訴:%2d,敗訴:%2d");
-
+	//裁判の数
+	DrawFormatString(180, 340, GetColor(0, 0, 0), "裁判の結果:\n起きた裁判の数:%2d",A);
+	
+	//裁判の数とスコアが０じゃないで場合分け
 	if(A==0&&score!=0)
 	 {
 		DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****【ゴールド免許】*****");
@@ -106,8 +108,8 @@ void ResultScene::Draw() const
 	}
 	 else 
 	{
+		//リムジンにぶつかった時用
 		DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****【さようなら】*****");
-
 	}
 }
 //終了時処理

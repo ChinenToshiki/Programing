@@ -21,7 +21,7 @@ private:
 	Enemy** enemy;
 	Charges* charges;
 	Trial* trial;
-	static int Tiarl;
+	static int JudgeCount;
 
 public:
 
