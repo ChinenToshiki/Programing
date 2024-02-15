@@ -1,0 +1,111 @@
+q 人間の血管をすべてつなげた長さは地球の赤道より長い？
+s YES
+s NO
+A 0
+
+q 11111101000年発行の1111101000円札に描かれてるの偉人は？
+s 聖徳太子
+s 渋沢栄一
+s 福沢諭吉
+s 北里柴三郎
+
+A 3
+
+q プログラマーが "quine" と呼ぶものは何ですか？
+s セルフレプリケーションするプログラム
+s 自己言及するプログラム
+s 量子コンピュータのための特殊なアルゴリズム
+s 画面上のテキストを自動生成するプログラム
+
+A 1
+
+q プログラム
+q
+q def calculate_average(numbers):
+q total = sum(numbers)
+q average = total / len(numbers)
+q return average
+
+q テストケース
+q numbers_list = [10, 20, 30, "40", 50]
+q result = calculate_average(numbers_list)
+q print(result)
+
+s プログラムに問題はなく、正しく動作する。
+s len(numbers) の代わりに len(numbers_list) を使用するべきだ。
+s average の計算式を修正して total // len(numbers) にするべきだ。
+s 文字列型の要素が含まれている場合は sum(numbers) の前に適切な型の要素だけを取り出す処理を追加するべきだ。
+
+A 1
+
+q #プログラム
+
+q def multiply_numbers(a, b):
+q result = a * b
+q return result
+
+q #テストケース
+qprint(multiply_numbers(3, 4))
+
+s. プログラムは問題なく、正しく動作する。
+s. result = a * b の代わりに result = a + b にするべきだ。
+s. テストケースの引数を文字列に変更するとエラーが発生する。
+s. return result の代わりに print(result) にすべきだ。
+
+A 0
+
+q プログラマーあるあるで、コードが動作する理由が分からないときによく言われる言葉は何でしょうか？
+s "It's a feature, not a bug."
+s "Works on my machine."
+s "I'll fix it later."
+s "Have you tried turning it off and on again?"
+
+A 0
+
+q C++で変数を宣言するためのキーワードは何ですか？
+s variable
+s int
+s declare
+s v
+
+A 1
+
+q C++のラムダ式はどのような機能を提供しますか？
+s 無名関数を作成する機能
+s 定数の定義と初期化を行う機能
+s オーバーロードされた演算子を作成する機能
+s クラスのメンバ関数を定義する機能
+
+A 0
+
+q C++でのスマートポインタの種類として正しいものはどれですか？
+s unique_ptr, weak_ptr, soft_ptr
+s smart_ptr, shared_ptr, weak_ptr
+s unique_pointer, shared_pointer, weak_pointer
+s auto_ptr, shared_ptr, weak_ptr
+
+A 2
+
+q C++での仮想関数と純粋仮想関数の違いは何ですか？
+s 仮想関数はオーバーライドできるが、純粋仮想関数はできない
+s 純粋仮想関数は抽象クラスであり、仮想関数は具象クラスである
+s 仮想関数は基底クラスで実装を持つが、純粋仮想関数は派生クラスで実装を提供する必要がある
+s 仮想関数はコンストラクタで使用され、純粋仮想関数はデストラクタで使用される
+
+A 2
+
+q C++での例外処理において、std::terminate()が呼び出される条件は何ですか？
+s 例外がキャッチされない
+s catchブロックで例外が再スローされる
+s noexcept指定された関数で例外が発生する
+s tryブロック内で新しい例外が発生する
+
+A 0
+
+q プログラマーが「Bikeshedding」とは何を指しているでしょうか？
+s コードの最適化
+s 設計の根本的な問題に対する討論
+s 些細な問題に対して時間を費やすこと
+s プログラミング言語のバージョン管理
+
+A 2
