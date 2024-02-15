@@ -32,6 +32,7 @@ public:
 	void SetChargesFlg(bool flg) { image_flg = flg, fps_flg = false; }
 	bool GetOnce() { return  once; }
 	int GetTiralCount() { return trial_count; }
+	int GetFps() { return fps; }
 
 	int Rand();
 

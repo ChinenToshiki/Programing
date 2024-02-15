@@ -159,6 +159,11 @@ float Player::GetHp() const
 	return this->hp;
 }
 
+void Player::SetHp() 
+{
+	this->hp = 1000;
+}
+
 //ƒoƒŠƒA–‡”æ“¾ˆ—
 int Player::GetBarrierCount() const
 {

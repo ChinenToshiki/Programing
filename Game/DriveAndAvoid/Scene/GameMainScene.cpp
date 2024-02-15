@@ -108,16 +108,16 @@ eSceneType GameMainScene::Update()
 					//ƒŠƒ€ƒWƒ“‚¶‚á‚È‚©‚Á‚½‚ç
 					if (enemy[i]->GetType() != 3) {
 						charges->HitCount();//Ù”»‰ñ”‰ÁŽZ
+						trial = new Trial();
+						trial->Initilize(enemy[i]->GetType());
+						hit = true;
 					}
 					//ƒŠƒ€ƒWƒ“‚¾‚Á‚½‚ç‘¦Ž€ŒY
 					else {
 						charges->SetChargesFlg(true);
+						charges->SetType(3);
 					}
-
-					trial = new Trial();
-					trial->Initilize(enemy[i]->GetType());
-
-					hit = true;
+					charges->Rand();
 					player->SetActive(false);
 					enemy[i]->Finalize();
 					delete enemy[i];
@@ -134,8 +134,6 @@ eSceneType GameMainScene::Update()
 		{
 			return eSceneType::E_RESULT;
 		}
-		
-
 
 		return GetNowScene();
 	}
@@ -148,9 +146,10 @@ eSceneType GameMainScene::Update()
 			if (player->GetHp() < 1000)
 			{
 				player->DecreaseHp(50.f);
+				player->IncreaseFuel(50.0f);
 				if (player->GetHp() > 1000)
 				{
-					
+					player->SetHp();
 				}
 			}
 			mileage += 100;
