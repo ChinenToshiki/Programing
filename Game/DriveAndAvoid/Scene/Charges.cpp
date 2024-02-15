@@ -55,16 +55,9 @@ void Charges::Draw() const
 	if (image_flg == true) 
 	{
 		DrawBox(0, 0, SCREEN_WIDTH, SCREEN_HIGHT, GetColor(255,255,255), TRUE);
-		//DrawString(SCREEN_WIDTH / 2, SCREEN_HIGHT / 2, "Ž€ŒY", GetColor(255, 0, 0));
-		if (get_rand == 1) {
-			DrawGraph(30, 0, image[0], FALSE);
-		}
-		else
-		{
-			DrawGraph(30, 0, image[2], FALSE);
-		}
+		DrawGraph(30, 0, image[0], FALSE);
 	}
-	if (type == 3 && get_rand == 1) {
+	if (type == 3) {
 		DrawGraph(460, 0, image[1], FALSE);
 	}
 	//DrawFormatString(100, 100, GetColor(255, 255, 255), "%d", fps);
