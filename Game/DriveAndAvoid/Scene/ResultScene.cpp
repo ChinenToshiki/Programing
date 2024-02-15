@@ -62,7 +62,9 @@ void ResultScene::Draw() const
 	//背景の描画
 	DrawGraph(0, 0, back_ground, TRUE);
 	GameMainScene Banana;
-	int A = Banana.GetTiarl();
+	Trial Gribal;
+	int Judge = Banana.GetTiarl();
+	int Correct = Gribal.GetCorrect();
 	
 	//スコア等表示領域
 	DrawBox(150, 150, 490, 400, GetColor(0, 153, 0), TRUE);
@@ -90,26 +92,26 @@ void ResultScene::Draw() const
 	DrawFormatString(180, 320, 0xFFFFFFF, "        =%6d", score);
 
 	//裁判の数
-	DrawFormatString(180, 340, GetColor(0, 0, 0), "裁判の結果:\n起きた裁判の数:%2d正解した数:%2d",A);
+	DrawFormatString(180, 340, GetColor(0, 0, 0), "裁判の結果:\n起きた裁判の数:%2d正解した数:%2d", Judge,Correct);
 	
 	//裁判の数とスコアが０じゃないで場合分け
-	if(A==0&&score!=0)
+	if(Judge ==0&&score!=0)
 	 {
 		DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****【ゴールド免許】*****");
 	 }
-	else if(A<3 && score != 0)
+	else if(Judge <3 && score != 0)
 	{
 		DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****【プチゴールド免許】*****");
 	}
-	else if(A<7 && score != 0)
+	else if(Judge <7 && score != 0)
 	{
 	 DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****【シルバー免許】*****");
 	 }
-	 else if(A<10 && score != 0)
+	 else if(Judge <10 && score != 0)
 	 {	 
 		DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****【ブロンズ免許】*****");
 	 }
-	 else if(A<14 && score != 0)
+	 else if(Judge <14 && score != 0)
 	 {	
 		DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****【免許停止】*****");
 	}
