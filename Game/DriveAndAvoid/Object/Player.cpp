@@ -119,6 +119,11 @@ void Player::DecreaseHp(float value)
 {
 	this->hp += value;
 }
+//”R—¿‰ñ•œˆ—
+void Player::IncreaseFuel(int value)
+{
+	this->fuel += value;
+}
 
 //ˆÊ’uî•ñæ“¾ˆ—
 Vector2D Player::GetLocation() const
@@ -168,21 +173,21 @@ void Player::Movement()
 	Vector2D move = Vector2D(0.0f);
 	angle = 0.0f;
 
-	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_LEFT)|| InputControl::GetLeftStick().x < -0.3f)
+	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_LEFT)|| InputControl::GetLeftStick().x < -0.5f)
 	{
 		move += Vector2D(-5.0f, 0.0f);
 		angle = -DX_PI_F / 18;
 	}
-	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_RIGHT)|| InputControl::GetLeftStick().x > 0.3f)
+	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_RIGHT)|| InputControl::GetLeftStick().x > 0.5f)
 	{
 		move += Vector2D(5.0f, 0.0f);
 		angle = DX_PI_F / 18;
 	}
-	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_UP)|| InputControl::GetLeftStick().y > 0.3f)
+	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_UP)|| InputControl::GetLeftStick().y > 0.5f)
 	{
 		move += Vector2D(0.0f, -5.0f);
 	}
-	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_DOWN)|| InputControl::GetLeftStick().y < -0.3f)
+	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_DOWN)|| InputControl::GetLeftStick().y < -0.5f)
 	{
 		move += Vector2D(0.0f, 5.0f);
 	}
