@@ -61,10 +61,10 @@ void ResultScene::Draw() const
 {
 	//”wŒi‚Ì•`‰æ
 	DrawGraph(0, 0, back_ground, TRUE);
-	GameMainScene Banana;
-	Trial Gribal;
-	int Judge = Banana.GetTiarl();
-	int Correct = Gribal.GetCorrect();
+	GameMainScene JudgeThrow;
+	Trial CorrectThrow;
+	int Judge = JudgeThrow.GetTiarl();
+	int Correct = CorrectThrow.GetCorrect();
 	
 	//ƒXƒRƒA“™•\Ž¦—Ìˆæ
 	DrawBox(150, 150, 490, 400, GetColor(0, 153, 0), TRUE);
