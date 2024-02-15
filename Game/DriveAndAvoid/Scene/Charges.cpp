@@ -26,8 +26,8 @@ Charges::~Charges()
 void Charges::Initialize()
 {
 	image[0] = LoadGraph("Resource/images/charges02.png");
-	image[1] = LoadGraph("Resource/images/ƒŠƒ€ƒWƒ“Ž€ŒY.png");
-	image[2] = LoadGraph("Resource/images/Death.png");
+	image[1] = LoadGraph("Resource/images/charges.png");
+	image[2] = LoadGraph("Resource/images/ƒŠƒ€ƒWƒ“Ž€ŒY.png");
 	fps = COOLTIME;
 	count = 0;
 	trial_count = 0;
@@ -52,13 +52,15 @@ void Charges::Update()
 
 void Charges::Draw() const
 {
-	if (image_flg == true) 
+	if (image_flg == true)
 	{
 		DrawBox(0, 0, SCREEN_WIDTH, SCREEN_HIGHT, GetColor(255,255,255), TRUE);
 		DrawGraph(30, 0, image[0], FALSE);
 	}
-	if (type == 3) {
-		DrawGraph(460, 0, image[1], FALSE);
+	if (type == 3 && image_flg == true) {
+		DrawGraph(30, 0, image[1], FALSE);
+		DrawGraph(480, 0, image[2], FALSE);
+
 	}
 	//DrawFormatString(100, 100, GetColor(255, 255, 255), "%d", fps);
 }
