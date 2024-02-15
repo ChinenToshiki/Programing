@@ -57,6 +57,6 @@ public:
 
 	bool GetVictoryOrDefeat();	//勝敗の真偽を持ってくる
 	bool GetEnd();				//裁判画面終了を知らせる
-	bool GetCorrect();			//正解数のゲット
+	int GetCorrect();			//正解数のゲット
 };
 

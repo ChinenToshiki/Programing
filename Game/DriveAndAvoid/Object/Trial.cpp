@@ -161,7 +161,7 @@ void Trial::Update()
 	}
 	else
 	{
-		if (InputControl::GetButtonDown(XINPUT_BUTTON_A))
+		if (InputControl::GetButtonDown(XINPUT_BUTTON_B))
 		{
 			end = true;
 		}
@@ -286,7 +286,7 @@ bool Trial::GetEnd()
 	return end;
 }
 
-bool Trial::GetCorrect()
+int Trial::GetCorrect()
 {
 	return correct_num;
 }
