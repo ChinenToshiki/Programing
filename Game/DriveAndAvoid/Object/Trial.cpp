@@ -161,7 +161,7 @@ void Trial::Update()
 	}
 	else
 	{
-		if (InputControl::GetButtonDown(XINPUT_BUTTON_A))
+		if (InputControl::GetButtonDown(XINPUT_BUTTON_B))
 		{
 			end = true;
 		}
