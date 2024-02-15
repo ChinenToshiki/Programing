@@ -1,7 +1,10 @@
 #pragma once
 
 #include"SceneBase.h"
+#include"Charges.h"
 #include"../Object/Trial.h"
+#include "GameMainScene.h"
+
 class ResultScene : public SceneBase
 {
 private:

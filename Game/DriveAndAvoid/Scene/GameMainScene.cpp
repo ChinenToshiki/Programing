@@ -204,6 +204,8 @@ void GameMainScene::Draw() const
 //終了時処理
 void GameMainScene::Finalize()
 {
+	RankingData data;
+
 	if (charges->GetChargesFlg()) {
 		mileage = 0;
 		for (int i = 0; i < ENEMY_NUM; i++) {
@@ -230,8 +232,11 @@ void GameMainScene::Finalize()
 		throw("Resource / dat / result_data.csvが開けません");
 	}
 
-	//スコアの保存
-	fprintf(fp, "%d\n", score);
+	if (data.GetScore(5) < score)
+	{
+		//スコアの保存
+		fprintf(fp, "%d\n", score);
+	}
 
 	//避けた数と得点の保存
 	for (int i = 0; i < ENEMY_NUM; i++)
@@ -242,9 +247,12 @@ void GameMainScene::Finalize()
 	//ファイルクローズ
 	fclose(fp);
 
+	Tiarl = (int)charges->GetTiralCount();
+
 	//動的確保したオブジェクトを削除する
 	player->Finallize();
 	delete player;
+
 
 	charges->Finalize();
 	delete charges;
@@ -301,4 +309,10 @@ bool GameMainScene::IsHitCheck(Player* p, Enemy* e)
 
 	//コリジョンデータより位置情報の差分が小さいならヒット
 	return ((fabsf(diff_location.x) < box_ex.x) && (fabsf(diff_location.y) < box_ex.y));
+}
+
+int GameMainScene::Tiarl = 0;  // 仮の初期化
+
+const int GameMainScene::GetTiarl() {
+	return Tiarl;
 }

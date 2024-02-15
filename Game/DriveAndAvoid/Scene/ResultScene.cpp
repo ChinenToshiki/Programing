@@ -54,7 +54,9 @@ void ResultScene::Draw() const
 {
 	//”wŒi‚Ì•`‰æ
 	DrawGraph(0, 0, back_ground, TRUE);
-
+	GameMainScene Banana;
+	int A = Banana.GetTiarl();
+	
 	//ƒXƒRƒA“™•\¦—Ìˆæ
 	DrawBox(150, 150, 490, 400, GetColor(0, 153, 0), TRUE);
 	DrawBox(150, 150, 490, 400, GetColor(0, 0, 0), FALSE);
@@ -82,26 +84,31 @@ void ResultScene::Draw() const
 
 	DrawFormatString(180, 340, GetColor(0, 0, 0), "Ù”»‚ÌŒ‹‰Ê:\n‹N‚«‚½Ù”»‚Ì”:%2d,Ÿ‘i:%2d,”s‘i:%2d");
 
-	////if(Tiar.GetTiarlCount()>14)
-	// {
-	//DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****y–Æ‹–’â~z*****");
-	// }
-	//else if(Tiar.GetTiarlCount()>7)
-	//{
-	// DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****yƒuƒƒ“ƒY–Æ‹–z*****");
-	//}
-	//else if(Tiar.GetTiarlCount()>5)
-	//{
-	// DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****yƒVƒ‹ƒo[–Æ‹–z*****");
-	// }
-	// else if(Tiar.GetTiarlCount()>3)
-	// {
-	// DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****yƒvƒ`ƒS[ƒ‹ƒh–Æ‹–z*****");
-	// }
-	// else if(Tiar.GetTiarlCount()==0)
-	// {
-	// DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****yƒS[ƒ‹ƒh–Æ‹–z*****");
-	//}
+	if(A==0&&score!=0)
+	 {
+		DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****yƒS[ƒ‹ƒh–Æ‹–z*****");
+	 }
+	else if(A<3 && score != 0)
+	{
+		DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****yƒvƒ`ƒS[ƒ‹ƒh–Æ‹–z*****");
+	}
+	else if(A<7 && score != 0)
+	{
+	 DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****yƒVƒ‹ƒo[–Æ‹–z*****");
+	 }
+	 else if(A<10 && score != 0)
+	 {	 
+		DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****yƒuƒƒ“ƒY–Æ‹–z*****");
+	 }
+	 else if(A<14 && score != 0)
+	 {	
+		DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****y–Æ‹–’â~z*****");
+	}
+	 else 
+	{
+		DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****y‚³‚æ‚¤‚È‚çz*****");
+
+	}
 }
 //I—¹ˆ—
 void ResultScene::Finalize()
