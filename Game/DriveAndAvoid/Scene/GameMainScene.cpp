@@ -140,27 +140,31 @@ eSceneType GameMainScene::Update()
 	else
 	{
 		trial->Update();
-		if (trial->GetVictoryOrDefeat())
-		{
-			player->SetActive(true);
-			if (player->GetHp() < 1000)
-			{
-				player->DecreaseHp(50.f);
-				player->IncreaseFuel(50.0f);
-				if (player->GetHp() > 1000)
-				{
-					player->SetHp();
-				}
-			}
-			mileage += 100;
-		}
-		else
-		{
-			
-		}
+		
 
 		if (trial->GetEnd())
 		{
+			if (trial->GetVictoryOrDefeat())
+			{
+				player->SetActive(true);
+				if (player->GetFuel() < 20000)
+				{
+					player->DecreaseHp(50.f);
+				}
+				if (player->GetHp() < 1000)
+				{
+					player->IncreaseFuel(50.0f);
+					if (player->GetHp() > 1000)
+					{
+						player->SetHp();
+					}
+				}
+				mileage += 100;
+			}
+			else
+			{
+				player->DecreaseHp(-100.0f);
+			}
 			hit = false;
 			delete trial;
 		}
@@ -225,12 +229,13 @@ void GameMainScene::Draw() const
 		DrawFormatStringF(fx, fy, GetColor(0, 0, 0), "PLAYER HP");
 		DrawBoxAA(fx, fy + 20.0f, fx + (player->GetHp() * 100 / 1000), fy + 40.0f, GetColor(255, 0, 0), TRUE);
 		DrawBoxAA(fx, fy + 20.0f, fx + 100.0f, fy + 40.0f, GetColor(0, 0, 0), FALSE);
+		
 	}
 	else
 	{
 		trial->Draw();
 	}
-
+	DrawFormatString(20, 20, 0xffffff, "%f", player->GetHp());
 }
 
 //I—¹ˆ—
