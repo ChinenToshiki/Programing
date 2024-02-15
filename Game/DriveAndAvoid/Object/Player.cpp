@@ -38,6 +38,9 @@ void Player::Initialize()
 //更新処理
 void Player::Update()
 {
+	if (this->hp > 1000) {
+		this->hp = 1000;
+	}
 
 	//操作不可状態であれば、自身を回転させる
 	if (!is_active)
@@ -59,6 +62,7 @@ void Player::Update()
 
 	//加減速処理
 	Acceleration();
+
 
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_START))
 	{
