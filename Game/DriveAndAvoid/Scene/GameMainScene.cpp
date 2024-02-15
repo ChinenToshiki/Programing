@@ -3,7 +3,7 @@
 #include"DxLib.h"
 #include<math.h>
 
-GameMainScene::GameMainScene() :high_score(0), back_ground(NULL), barrier_image(NULL), mileage(0), player(nullptr), enemy(nullptr),charges(nullptr),hit(false),trial(nullptr)
+GameMainScene::GameMainScene() :high_score(0), back_ground(NULL), barrier_image(NULL), mileage(0), player(nullptr), enemy(nullptr), charges(nullptr), hit(false), trial(nullptr)
 {
 	for (int i = 0; i < ENEMY_NUM; i++)
 	{
@@ -24,7 +24,7 @@ void GameMainScene::Initialize()
 	ReadHighScore();
 
 	//画像の読み込み
-	back_ground = LoadGraph  ("Resource/images/back.bmp");
+	back_ground = LoadGraph("Resource/images/back.bmp");
 	barrier_image = LoadGraph("Resource/images/barrier.png");
 	int result = LoadDivGraph("Resource/images/car.bmp", 3, 3, 1, 63, 120, enemy_image);
 	enemy_image[3] = LoadGraph("Resource/images/limousine.png");
@@ -66,25 +66,25 @@ eSceneType GameMainScene::Update()
 		//プレイヤーの更新
 		player->Update();
 
-	charges->Update();
+		charges->Update();
 
 		//移動距離の更新
 		mileage += (int)player->GetSpeed() + 5;
 
-	//敵生成処理
-	if (mileage / 20 % 100 == 0)
-	{
-		for (int i = 0; i < 10; i++)
+		//敵生成処理
+		if (mileage / 20 % 100 == 0)
 		{
-			if (enemy[i] == nullptr)
+			for (int i = 0; i < 10; i++)
 			{
-				int type = GetRand(4) % 4;
-				enemy[i] = new Enemy(type, enemy_image[type]);
-				enemy[i]->Initialize();
-				break;
+				if (enemy[i] == nullptr)
+				{
+					int type = GetRand(4) % 4;
+					enemy[i] = new Enemy(type, enemy_image[type]);
+					enemy[i]->Initialize();
+					break;
+				}
 			}
 		}
-	}
 
 		//敵の更新と当たり判定チェック
 		for (int i = 0; i < 10; i++)
@@ -102,42 +102,55 @@ eSceneType GameMainScene::Update()
 					enemy[i] = nullptr;
 				}
 
-			//当たり判定の確認
-			if (IsHitCheck(player, enemy[i]))
-			{
-				//リムジンじゃなかったら
-				if (enemy[i]->GetType() != 3) {
-					charges->HitCount();//裁判回数加算
+				//当たり判定の確認
+				if (IsHitCheck(player, enemy[i]))
+				{
+					//リムジンじゃなかったら
+					if (enemy[i]->GetType() != 3) {
+						charges->HitCount();//裁判回数加算
+					}
+					//リムジンだったら即死刑
+					else {
+						charges->SetChargesFlg(true);
+					}
+
+					trial = new Trial();
+					trial->Initilize(enemy[i]->GetType());
+
+					hit = true;
+					player->SetActive(false);
+					player->DecreaseHp(-50.0f);
+					enemy[i]->Finalize();
+					delete enemy[i];
+					enemy[i] = nullptr;
 				}
-				//リムジンだったら即死刑
-				else {
-					charges->SetChargesFlg(true);
-				}	
-
-				trial = new Trial();
-				trial->Initilize(enemy[i]->GetType());
-
-				hit = true;
-				player->SetActive(false);
-				player->DecreaseHp(-50.0f);
-				enemy[i]->Finalize();
-				delete enemy[i];
-				enemy[i] = nullptr;
 			}
 		}
+		//死刑判決描画中にボタンが押されてたらリザルトへ
+		if (charges->GetOnce()) {
+			return eSceneType::E_RESULT;
+		}
+		//プレイヤーの燃料or体力が0未満ならリザルトへ飛ぶ
+		if (player->GetFuel() < 0.0f || player->GetHp() < 0.0f)
+		{
+			return eSceneType::E_RESULT;
+		}
+		
+
+
+		return GetNowScene();
 	}
-	//死刑判決描画中にボタンが押されてたらリザルトへ
-	if (charges->GetOnce()) {
-		return eSceneType::E_RESULT;
-	}
-	//プレイヤーの燃料or体力が0未満ならリザルトへ飛ぶ
-	if (player->GetFuel() < 0.0f || player->GetHp() < 0.0f)
+	else
 	{
-		return eSceneType::E_RESULT;
+		trial->Update();
+		if (trial->GetEnd())
+		{
+			hit = false;
+			delete trial;
+		}
+
+		return GetNowScene();
 	}
-
-
-	return GetNowScene();
 }
 
 //描画処理
@@ -191,10 +204,10 @@ void GameMainScene::Draw() const
 
 		//燃料ゲージの描画
 		float fx = 510.0f;
-	float fy = 390.0f;
-	DrawFormatStringF(fx, fy, GetColor(0, 0, 0), "FUEL METER");
-	DrawBoxAA(fx, fy + 20.0f, fx + (player->GetFuel() * 100 / 20000), fy + 40.0f, GetColor(0, 102, 204), TRUE);
-	DrawBoxAA(fx, fy + 20.0f, fx + 100.0f, fy + 40.0f, GetColor(0, 0, 0), FALSE);
+		float fy = 390.0f;
+		DrawFormatStringF(fx, fy, GetColor(0, 0, 0), "FUEL METER");
+		DrawBoxAA(fx, fy + 20.0f, fx + (player->GetFuel() * 100 / 20000), fy + 40.0f, GetColor(0, 102, 204), TRUE);
+		DrawBoxAA(fx, fy + 20.0f, fx + 100.0f, fy + 40.0f, GetColor(0, 0, 0), FALSE);
 
 		//体力ゲージの描画
 		fx = 510.0f;
