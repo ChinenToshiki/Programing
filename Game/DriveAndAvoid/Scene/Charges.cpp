@@ -13,7 +13,7 @@
 // クールタイムの設定（フレーム数）
 #define COOLTIME 300
 
-Charges::Charges() :fps(0), type(0), count(0), trial_count(0), image_flg(false), fps_flg(false), once(false)
+Charges::Charges() :fps(0), type(0), count(0), trial_count(0),get_rand(NULL), image_flg(false), fps_flg(false), once(false)
 {
 	for (int i = 0; i < 3; i++) {
 		image[i] = NULL;
@@ -71,19 +71,19 @@ void Charges::Draw() const
 	{
 		DrawBox(0, 0, SCREEN_WIDTH, SCREEN_HIGHT, GetColor(255,255,255), TRUE);
 		//DrawString(SCREEN_WIDTH / 2, SCREEN_HIGHT / 2, "死刑", GetColor(255, 0, 0));
-		if (get_rand == 1) {
+		//if (get_rand == 1) {
 			DrawGraph(30, 0, image[0], FALSE);
-		}
-		else
-		{
-			DrawGraph(30, 0, image[2], FALSE);
-		}
+		//}
+		//else
+		//{
+		//	DrawGraph(30, 0, image[2], FALSE);
+		//}
 	}
 	if (fps_flg == true) {
 		DrawBox(5, 5, 150, 40, GetColor(255, 0, 0), TRUE);
 		DrawString(15, 15, "現在執行猶予中", 0x00000);
 	}
-	if (type == 3 && get_rand == 1) {
+	if (type == 3 /*&& get_rand == 1*/) {
 		DrawGraph(460, 0, image[1], FALSE);
 	}
 	//DrawFormatString(100, 100, GetColor(255, 255, 255), "%d", fps);
