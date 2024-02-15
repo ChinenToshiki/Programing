@@ -55,7 +55,7 @@ void HelpScene::Draw() const
 	DrawString(20, 300, "当たる度に裁判が起こり、選択肢が現れます。", 0xffffff, 0);
 	DrawString(20, 320, "裁判に勝てば燃料と体力が回復して\n裁判に敗北すれば燃料と体力が減少します。", 0xffffff, 0);
 	DrawString(20, 360, "一定回数以上障害物に当たると即死刑になるので\n気を付けましょう", 0xffffff, 0);
-	DrawString(20, 400, "リムジンに当たったら即死です。\nあと、確率で即死します。", 0xffffff, 0);
+	DrawString(20, 400, "リムジンに当たったら即死です。\n", 0xffffff, 0);
 	DrawString(20, 450, "----　Bボタンを押してタイトルに戻る　----", 0xffffff, 0);
 }
 
