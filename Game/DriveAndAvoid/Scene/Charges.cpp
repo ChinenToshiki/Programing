@@ -46,11 +46,13 @@ void Charges::Update()
 	}
 	if (fps_flg && count != 1) {
 		image_flg = true;
+		fps_flg = false;
 	}
 	//Ù”»ãŒÀ‚ð‰z‚µ‚½ê‡‚Å‰æ‘œ•\Ž¦
 	if (trial_count >= Limit)
 	{
 		image_flg = true;
+		fps_flg = false;
 	}
 	//ƒ{ƒ^ƒ“‚ªˆê‰ñ‰Ÿ‚³‚ê‚½‚Ì‚ð”»’è
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_B) && image_flg == true && once == false) {
