@@ -117,7 +117,6 @@ eSceneType GameMainScene::Update()
 						charges->SetChargesFlg(true);
 						charges->SetType(3);
 					}
-					charges->Rand();
 					player->SetActive(false);
 					enemy[i]->Finalize();
 					delete enemy[i];
@@ -149,11 +148,11 @@ eSceneType GameMainScene::Update()
 				player->SetActive(true);
 				if (player->GetFuel() < 20000)
 				{
-					player->DecreaseHp(50.f);
+					player->DecreaseHp(50.0);
 				}
 				if (player->GetHp() < 1000)
 				{
-					player->IncreaseFuel(50.0f);
+					player->IncreaseFuel(50.0);
 					if (player->GetHp() > 1000)
 					{
 						player->SetHp();
@@ -235,7 +234,6 @@ void GameMainScene::Draw() const
 	{
 		trial->Draw();
 	}
-	DrawFormatString(20, 20, 0xffffff, "%f", player->GetHp());
 }
 
 //I—¹ˆ—

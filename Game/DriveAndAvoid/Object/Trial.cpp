@@ -48,6 +48,7 @@ void Trial::Initilize(int type)
 	background_image = LoadGraph("Resource/images/Ù”».png");
 	win_image = LoadGraph("Resource/images/Ÿ‘i.png");
 	lose_image = LoadGraph("Resource/images/—Lß.png");
+	push_b_image = LoadGraph("Resource/images/Push_B.png");
 
 	if (background_image == -1)
 	{
@@ -60,6 +61,10 @@ void Trial::Initilize(int type)
 	if (lose_image == -1)
 	{
 		throw("Resource/images/Ÿ‘i.bmg‚ª‚ ‚è‚Ü‚¹‚ñ");
+	}
+	if (background_image == -1)
+	{
+		throw("Resource/images/Push_B.png‚ª‚ ‚è‚Ü‚¹‚ñ");
 	}
 
 	laughing_hard = LoadSoundMem("Resource/sounds/”šÎ3`6–¼.mp3");
@@ -161,7 +166,7 @@ void Trial::Update()
 	}
 	else
 	{
-		if (InputControl::GetButtonDown(XINPUT_BUTTON_A))
+		if (InputControl::GetButtonDown(XINPUT_BUTTON_B))
 		{
 			end = true;
 		}
@@ -212,6 +217,7 @@ void Trial::Draw() const
 		{
 			DrawGraph(0, 0, lose_image, true);
 		}
+		DrawGraph(300, 200, push_b_image,true);
 	}
 }
 
