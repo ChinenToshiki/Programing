@@ -42,9 +42,9 @@ void Player::Update()
 	//操作不可状態であれば、自身を回転させる
 	if (!is_active)
 	{
-		angle += DX_PI_F / 24.0f;
+		angle += DX_PI_F / 2.40f;
 		speed = 1.0f;
-		if (angle >= DX_PI_F * 4.0f)
+		if (angle >= DX_PI_F * 40.0f)
 		{
 			is_active = true;
 		}
@@ -66,7 +66,7 @@ void Player::Update()
 	}
 
 	//バリア処理
-	if (InputControl::GetButtonDown(XINPUT_BUTTON_B) && barrier_count > 0)
+	/*if (InputControl::GetButtonDown(XINPUT_BUTTON_B) && barrier_count > 0)
 	{
 		if (barrier == nullptr)
 		{
@@ -74,7 +74,7 @@ void Player::Update()
 			barrier = new Barrier;
 		}
 	}
-	
+	*/
 	//バリアが生成されていたら、更新を行う
 	if (barrier != nullptr)
 	{
@@ -93,7 +93,7 @@ void Player::Draw()
 
 	if (barrier != nullptr)
 	{
-		barrier->Draw(this->location);
+		//barrier->Draw(this->location);
 	}
 }
 
@@ -170,21 +170,21 @@ void Player::Movement()
 
 	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_LEFT)|| InputControl::GetLeftStick().x < -0.3f)
 	{
-		move += Vector2D(-1.0f, 0.0f);
+		move += Vector2D(-5.0f, 0.0f);
 		angle = -DX_PI_F / 18;
 	}
 	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_RIGHT)|| InputControl::GetLeftStick().x > 0.3f)
 	{
-		move += Vector2D(1.0f, 0.0f);
+		move += Vector2D(5.0f, 0.0f);
 		angle = DX_PI_F / 18;
 	}
 	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_UP)|| InputControl::GetLeftStick().y > 0.3f)
 	{
-		move += Vector2D(0.0f, -1.0f);
+		move += Vector2D(0.0f, -5.0f);
 	}
 	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_DOWN)|| InputControl::GetLeftStick().y < -0.3f)
 	{
-		move += Vector2D(0.0f, 1.0f);
+		move += Vector2D(0.0f, 5.0f);
 	}
 	location += move;
 

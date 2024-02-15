@@ -13,7 +13,7 @@
 // クールタイムの設定（フレーム数）
 #define COOLTIME 300
 
-Charges::Charges() :fps(0),count(0),judgment_count(0), image(0), image_flg(false), fps_flg(false), once(false)
+Charges::Charges() :fps(0),count(0),trial_count(0), image(0), image_flg(false), fps_flg(false), once(false)
 {
 }
 Charges::~Charges()
@@ -25,7 +25,7 @@ void Charges::Initialize()
 	image = LoadGraph("Resource/images/charges02.png");
 	fps = COOLTIME;
 	count = 0;
-	judgment_count = 0;
+	trial_count = 0;
 	image_flg = false;
 	once = false;
 	fps_flg = false;
@@ -46,11 +46,13 @@ void Charges::Update()
 	}
 	if (fps_flg && count != 1) {
 		image_flg = true;
+		fps_flg = false;
 	}
 	//裁判上限を越した場合で画像表示
-	if (judgment_count >= Limit)
+	if (trial_count >= Limit)
 	{
 		image_flg = true;
+		fps_flg = false;
 	}
 	//ボタンが一回押されたのを判定
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_B) && image_flg == true && once == false) {
@@ -83,5 +85,5 @@ void Charges::HitCount()
 	// クールタイム開始と裁判のカウントを増加
 	count += 1;
 	fps_flg = true;
-	judgment_count += 1;
+	trial_count += 1;
 }
