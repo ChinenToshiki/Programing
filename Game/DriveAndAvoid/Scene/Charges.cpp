@@ -79,11 +79,11 @@ void Charges::Draw() const
 			DrawGraph(30, 0, image[2], FALSE);
 		}
 	}
-	if (fps_flg == true && type != 3) {
-		DrawBox(5, 5, 150, 40, GetColor(255, 0, 0), TRUE);
-		SetFontSize(18);
-		DrawString(15, 15, "Œ»İ·s—P—\’†", 0x00000);
-	}
+	//if (fps_flg == true && type != 3) {
+	//	DrawBox(5, 5, 150, 40, GetColor(255, 0, 0), TRUE);
+	//	SetFontSize(18);
+	//	//DrawString(15, 15, "Œ»İ·s—P—\’†", 0x00000);
+	//}
 	if (type == 3 && get_rand == 1) {
 		DrawGraph(460, 0, image[1], FALSE);
 	}
@@ -117,7 +117,7 @@ int Charges::Rand()
 	if (rand >= 0 && rand <= 4) {
 		get_rand = 0;
 		image_flg = true;
-		fps_flg = false;
+		//fps_flg = false;
 	}
 	//
 	else {
