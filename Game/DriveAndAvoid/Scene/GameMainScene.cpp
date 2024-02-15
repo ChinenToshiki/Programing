@@ -119,7 +119,6 @@ eSceneType GameMainScene::Update()
 
 					hit = true;
 					player->SetActive(false);
-					player->DecreaseHp(-50.0f);
 					enemy[i]->Finalize();
 					delete enemy[i];
 					enemy[i] = nullptr;
@@ -143,6 +142,24 @@ eSceneType GameMainScene::Update()
 	else
 	{
 		trial->Update();
+		if (trial->GetVictoryOrDefeat())
+		{
+			player->SetActive(true);
+			if (player->GetHp() < 1000)
+			{
+				player->DecreaseHp(50.f);
+				if (player->GetHp() > 1000)
+				{
+					
+				}
+			}
+			mileage += 100;
+		}
+		else
+		{
+			
+		}
+
 		if (trial->GetEnd())
 		{
 			hit = false;

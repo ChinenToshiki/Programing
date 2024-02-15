@@ -24,6 +24,7 @@ Trial::Trial() : background_image(0), presiding_judge(0), win_image(0), lose_ima
 	select_answer = 0;
 	num_of_problems_now = 0;
 	num_of_actual_problems = 0;
+	laughing_hard = 0;
 }
 
 Trial::~Trial()
@@ -49,12 +50,14 @@ void Trial::Initilize(int type)
 	}
 	if (win_image == -1)
 	{
-		throw("Resource/images/charges02.png‚ª‚ ‚è‚Ü‚¹‚ñ");
+		throw("Resource/images/Ÿ‘i.png‚ª‚ ‚è‚Ü‚¹‚ñ");
 	}
 	if (lose_image == -1)
 	{
-		throw("Resource/images/Title.bmg‚ª‚ ‚è‚Ü‚¹‚ñ");
+		throw("Resource/images/Ÿ‘i.bmg‚ª‚ ‚è‚Ü‚¹‚ñ");
 	}
+
+	laughing_hard = LoadSoundMem("Resource/sounds/");
 
 	LoadTrialData();
 
@@ -108,10 +111,12 @@ void Trial::Update()
 			{
 				if (correct_num > MAX_QUESTION / 2)
 				{
+					PlaySoundMem(laughing_hard, DX_PLAYTYPE_LOOP, TRUE);
 					victory_or_defeat = true;
 				}
 				else
 				{
+					PlaySoundMem(laughing_hard, DX_PLAYTYPE_LOOP, TRUE);
 					victory_or_defeat = false;
 				}
 			}

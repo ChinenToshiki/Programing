@@ -36,6 +36,9 @@ private:
 	bool end;							//裁判画面終了
 	unsigned int num_of_actual_problems;//実際の問題数
 
+	//ここから音源変数
+	int laughing_hard;					//爆笑音源
+
 public:
 	Trial();					//コンストラクタ
 	~Trial();					//デストラクタ
