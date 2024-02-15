@@ -21,8 +21,10 @@ private:
 	Enemy** enemy;
 	Charges* charges;
 	Trial* trial;
+	static int Tiarl;
 
 public:
+
 	GameMainScene();
 	virtual ~GameMainScene();
 
@@ -32,6 +34,7 @@ public:
 	virtual void Finalize() override;
 
 	virtual eSceneType GetNowScene() const override;
+	static const int GetTiarl();
 
 private:
 	void ReadHighScore();
