@@ -62,9 +62,7 @@ void ResultScene::Draw() const
 	//背景の描画
 	DrawGraph(0, 0, back_ground, TRUE);
 	GameMainScene JudgeThrow;
-	Trial CorrectThrow;
 	int Judge = JudgeThrow.GetTiarl();
-	int Correct = CorrectThrow.GetCorrect();
 	
 	//スコア等表示領域
 	DrawBox(150, 150, 490, 400, GetColor(0, 153, 0), TRUE);
@@ -92,7 +90,7 @@ void ResultScene::Draw() const
 	DrawFormatString(180, 320, 0xFFFFFFF, "        =%6d", score);
 
 	//裁判の数
-	DrawFormatString(180, 340, GetColor(0, 0, 0), "裁判の結果:\n起きた裁判の数:%2d正解した数:%2d", Judge,Correct);
+	DrawFormatString(180, 340, GetColor(0, 0, 0), "裁判の結果:\n起きた裁判の数:%2d正解した数:%2d", Judge);
 	
 	//裁判の数とスコアが０じゃないで場合分け
 	if(Judge ==0&&score!=0)
