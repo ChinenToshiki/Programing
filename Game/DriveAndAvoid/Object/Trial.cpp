@@ -17,7 +17,6 @@ Trial::Trial() : background_image(0), presiding_judge(0), win_image(0), lose_ima
 	sfile_name[0] = "Resource/text/スポーツカー.txt";
 	sfile_name[1] = "Resource/text/セダン車(青).txt";
 	sfile_name[2] = "Resource/text/セダン車(赤).txt";
-	sfile_name[3] = "Resource/text/test.txt";
 	victory_or_defeat = false;
 	correct_num = 0;
 	wrong_num = 0;
@@ -25,6 +24,8 @@ Trial::Trial() : background_image(0), presiding_judge(0), win_image(0), lose_ima
 	num_of_problems_now = 0;
 	num_of_actual_problems = 0;
 	laughing_hard = 0;
+	wrong_sound = 0;
+	correct_sound = 0;
 }
 
 Trial::~Trial()
@@ -57,12 +58,28 @@ void Trial::Initilize(int type)
 		throw("Resource/images/勝訴.bmgがありません");
 	}
 
-	laughing_hard = LoadSoundMem("Resource/sounds/");
+	laughing_hard = LoadSoundMem("Resource/sounds/爆笑3～6名.mp3");
+	wrong_sound = LoadSoundMem("Resource/sounds/不正解1.mp3");
+	correct_sound = LoadSoundMem("Resource/sounds/correct001.mp3");
+
+	if (laughing_hard == -1)
+	{
+		throw("Resource/sounds/爆笑3～6名.mp3");
+	}
+	if (wrong_sound == -1)
+	{
+		throw("Resource/sounds/不正解1.mp3");
+	}
+	if (correct_sound == -1)
+	{
+		throw("Resource/sounds/correct001.mp3");
+	}
+
 
 	LoadTrialData();
 
 	srand((unsigned)time(NULL)); //乱数の仕組みを初期化。
-	num_of_actual_problems = (rand() % (question_num - 0 + 1)) + 0; //乱数の生成
+	num_of_actual_problems = GetRand(11); //乱数の生成
 
 }
 
@@ -100,11 +117,18 @@ void Trial::Update()
 			if (select_answer == trial_data[num_of_actual_problems].answer)
 			{
 				correct_num++;
+				PlaySoundMem(correct_sound, DX_PLAYTYPE_NORMAL, TRUE);
 			}
+			else
+			{
+				PlaySoundMem(wrong_sound, DX_PLAYTYPE_NORMAL, TRUE);
+			}
+
+			select_answer = 0;
 
 
 			srand((unsigned)time(NULL)); //乱数の仕組みを初期化。
-			num_of_actual_problems = (rand() % (question_num - 0 + 1)) + 0; //乱数の生成
+			num_of_actual_problems = GetRand(11); //乱数の生成
 			num_of_problems_now++;
 
 			if (num_of_problems_now == MAX_QUESTION)

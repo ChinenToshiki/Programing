@@ -38,6 +38,8 @@ private:
 
 	//ここから音源変数
 	int laughing_hard;					//爆笑音源
+	int correct_sound;					//正解音源
+	int wrong_sound;					//不正解音源
 
 public:
 	Trial();					//コンストラクタ
