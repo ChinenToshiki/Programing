@@ -24,6 +24,7 @@ private:
 	int presiding_judge;				//裁判長画像
 	int win_image;						//勝訴画像
 	int lose_image;						//敗訴画像
+	int push_b_image;					//Bボタンを押してね画像
 	int enemy_type;						//敵のタイプ
 	string sfile_name[ENEMY_NUM];		//キャラごとの問題文などのファイルネーム配列
 	vector<sTrialData> trial_data;		//構造体変数
