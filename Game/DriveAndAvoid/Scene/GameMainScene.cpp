@@ -271,6 +271,7 @@ void GameMainScene::Finalize()
 		throw("Resource / dat / result_data.csvが開けません");
 	}
 
+	//データの５番目(1番低いスコア)と現在のスコアを比較して、現在のスコアが高ければ保存。じゃなければ保存しない
 	if (data.GetScore(5) < score)
 	{
 		//スコアの保存
@@ -286,7 +287,8 @@ void GameMainScene::Finalize()
 	//ファイルクローズ
 	fclose(fp);
 
-	Tiarl = (int)charges->GetTiralCount();
+	//裁判受けた数を変数に保存
+	JudgeCount = (int)charges->GetTiralCount();
 
 	//動的確保したオブジェクトを削除する
 	player->Finallize();
@@ -350,8 +352,10 @@ bool GameMainScene::IsHitCheck(Player* p, Enemy* e)
 	return ((fabsf(diff_location.x) < box_ex.x) && (fabsf(diff_location.y) < box_ex.y));
 }
 
-int GameMainScene::Tiarl = 0;  // 仮の初期化
+// 仮の初期化
+int GameMainScene::JudgeCount = 0;  
 
+//裁判の数を保存する関数
 const int GameMainScene::GetTiarl() {
-	return Tiarl;
+	return JudgeCount;
 }
