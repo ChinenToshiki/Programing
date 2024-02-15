@@ -26,6 +26,10 @@ Trial::Trial() : background_image(0), presiding_judge(0), win_image(0), lose_ima
 	laughing_hard = 0;
 	wrong_sound = 0;
 	correct_sound = 0;
+	for (int i = 0; i < sizeof(already_submitted); i++)
+	{
+		already_submitted[i] = false;
+	}
 }
 
 Trial::~Trial()
@@ -80,6 +84,7 @@ void Trial::Initilize(int type)
 
 	srand((unsigned)time(NULL)); //乱数の仕組みを初期化。
 	num_of_actual_problems = GetRand(11); //乱数の生成
+	already_submitted[num_of_actual_problems] = true;//出た問題を記憶しておく
 
 }
 
@@ -112,7 +117,7 @@ void Trial::Update()
 			}
 		}
 
-		if (InputControl::GetButtonDown(XINPUT_BUTTON_A))
+		if (InputControl::GetButtonDown(XINPUT_BUTTON_B))
 		{
 			if (select_answer == trial_data[num_of_actual_problems].answer)
 			{
@@ -124,11 +129,19 @@ void Trial::Update()
 				PlaySoundMem(wrong_sound, DX_PLAYTYPE_NORMAL, TRUE);
 			}
 
+			
+
 			select_answer = 0;
 
-
 			srand((unsigned)time(NULL)); //乱数の仕組みを初期化。
-			num_of_actual_problems = GetRand(11); //乱数の生成
+
+			while (already_submitted[num_of_actual_problems])
+			{
+				num_of_actual_problems = GetRand(11); //乱数の生成
+			}
+
+			already_submitted[num_of_actual_problems] = true;
+
 			num_of_problems_now++;
 
 			if (num_of_problems_now == MAX_QUESTION)
@@ -271,5 +284,10 @@ bool Trial::GetVictoryOrDefeat()
 bool Trial::GetEnd()
 {
 	return end;
+}
+
+bool Trial::GetCorrect()
+{
+	return correct_num;
 }
 
