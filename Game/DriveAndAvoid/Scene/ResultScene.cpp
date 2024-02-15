@@ -44,7 +44,14 @@ eSceneType ResultScene::Update()
 	//Bボタンでランキングに飛ぶ
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_B))
 	{
-		return eSceneType::E_RANKING_INPUT;
+		if (score != 0)
+		{
+			return eSceneType::E_RANKING_INPUT;
+		}
+		else
+		{
+			return eSceneType::E_TITLE;
+		}
 	}
 	return GetNowScene();
 }
@@ -83,7 +90,7 @@ void ResultScene::Draw() const
 	DrawFormatString(180, 320, 0xFFFFFFF, "        =%6d", score);
 
 	//裁判の数
-	DrawFormatString(180, 340, GetColor(0, 0, 0), "裁判の結果:\n起きた裁判の数:%2d",A);
+	DrawFormatString(180, 340, GetColor(0, 0, 0), "裁判の結果:\n起きた裁判の数:%2d正解した数:%2d",A);
 	
 	//裁判の数とスコアが０じゃないで場合分け
 	if(A==0&&score!=0)
