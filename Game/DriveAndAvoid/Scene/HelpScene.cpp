@@ -47,7 +47,7 @@ void HelpScene::Draw() const
 
 	DrawString(20, 160, "----　操作方法　----",0xffffff,0);
 	DrawString(20, 180, "十字キーで車・キーを移動", 0xffffff, 0);
-	DrawString(20, 200, "Bボタンでバリア/決定", 0xffffff, 0);
+	DrawString(20, 200, "Bボタンで決定", 0xffffff, 0);
 	DrawString(20, 220, "RBボタンでギアを上げる　LBボタンでギアを下げる", 0xffffff, 0);
 	DrawString(20, 240, "これは障害物を避けながら", 0xffffff, 0);
 	DrawString(20, 260, "走り続けるゲームです", 0xffffff, 0);
@@ -55,6 +55,7 @@ void HelpScene::Draw() const
 	DrawString(20, 300, "当たる度に裁判が起こり、選択肢が現れます。", 0xffffff, 0);
 	DrawString(20, 320, "裁判に勝てば燃料と体力が回復して\n裁判に敗北すれば燃料と体力が減少します。", 0xffffff, 0);
 	DrawString(20, 360, "一定回数以上障害物に当たると即死刑になるので\n気を付けましょう", 0xffffff, 0);
+	DrawString(20, 400, "リムジンに当たったら即死です。\nあと、確率で即死します。", 0xffffff, 0);
 	DrawString(20, 450, "----　Bボタンを押してタイトルに戻る　----", 0xffffff, 0);
 }
 
