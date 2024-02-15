@@ -286,7 +286,7 @@ bool Trial::GetEnd()
 	return end;
 }
 
-bool Trial::GetCorrect()
+int Trial::GetCorrect()
 {
 	return correct_num;
 }
