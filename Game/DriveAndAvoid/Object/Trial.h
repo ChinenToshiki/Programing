@@ -35,6 +35,8 @@ private:
 	unsigned int num_of_problems_now;	//今の問題数
 	bool end;							//裁判画面終了
 	unsigned int num_of_actual_problems;//実際の問題数
+	bool already_submitted[12];			//ランダムに問題を出すときに同じ問題を出さないようにする
+	bool button_on;						//ボタンを押したか
 
 	//ここから音源変数
 	int laughing_hard;					//爆笑音源
@@ -55,5 +57,6 @@ public:
 
 	bool GetVictoryOrDefeat();	//勝敗の真偽を持ってくる
 	bool GetEnd();				//裁判画面終了を知らせる
+	bool GetCorrect();			//正解数のゲット
 };
 
