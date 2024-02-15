@@ -39,20 +39,20 @@ void Charges::Initialize()
 void Charges::Update()
 {
 	// ÉNÅ[ÉãÉ_ÉEÉìèàóù
-	if (fps_flg == true) {
-		if (fps > 0) {
-			fps--;
-		}
-		else if (fps == 0) {
-			fps = COOLTIME;
-			count = 0;
-			fps_flg = false;
-		}
-	}
-	if (fps_flg && count != 1) {
+	//if (fps_flg == true) {
+	//	if (fps > 0) {
+	//		fps--;
+	//	}
+	//	else if (fps == 0) {
+	//		fps = COOLTIME;
+	//		count = 0;
+	//		fps_flg = false;
+	//	}
+	//}
+	/*if (fps_flg && count != 1) {
 		image_flg = true;
 		fps_flg = false;
-	}
+	}*/
 	//çŸîªè„å¿ÇâzÇµÇΩèÍçáÇ≈âÊëúï\é¶
 	if (trial_count >= Limit)
 	{
@@ -71,19 +71,20 @@ void Charges::Draw() const
 	{
 		DrawBox(0, 0, SCREEN_WIDTH, SCREEN_HIGHT, GetColor(255,255,255), TRUE);
 		//DrawString(SCREEN_WIDTH / 2, SCREEN_HIGHT / 2, "éÄåY", GetColor(255, 0, 0));
-		//if (get_rand == 1) {
+		if (get_rand == 1) {
 			DrawGraph(30, 0, image[0], FALSE);
-		//}
-		//else
-		//{
-		//	DrawGraph(30, 0, image[2], FALSE);
-		//}
+		}
+		else
+		{
+			DrawGraph(30, 0, image[2], FALSE);
+		}
 	}
-	if (fps_flg == true) {
+	if (fps_flg == true && type != 3) {
 		DrawBox(5, 5, 150, 40, GetColor(255, 0, 0), TRUE);
+		SetFontSize(18);
 		DrawString(15, 15, "åªç›é∑çsóPó\íÜ", 0x00000);
 	}
-	if (type == 3 /*&& get_rand == 1*/) {
+	if (type == 3 && get_rand == 1) {
 		DrawGraph(460, 0, image[1], FALSE);
 	}
 	//DrawFormatString(100, 100, GetColor(255, 255, 255), "%d", fps);
