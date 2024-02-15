@@ -56,8 +56,8 @@ void ResultScene::Draw() const
 	DrawGraph(0, 0, back_ground, TRUE);
 
 	//スコア等表示領域
-	DrawBox(150, 150, 490, 370, GetColor(0, 153, 0), TRUE);
-	DrawBox(150, 150, 490, 370, GetColor(0, 0, 0), FALSE);
+	DrawBox(150, 150, 490, 400, GetColor(0, 153, 0), TRUE);
+	DrawBox(150, 150, 490, 400, GetColor(0, 0, 0), FALSE);
 
 	DrawBox(500, 0, 640, 480, GetColor(0, 153, 0), TRUE);
 
@@ -79,8 +79,30 @@ void ResultScene::Draw() const
 	DrawString(180, 320, "スコア", GetColor(0, 0, 0));
 
 	DrawFormatString(180, 320, 0xFFFFFFF, "        =%6d", score);
-}
 
+	DrawFormatString(180, 340, GetColor(0, 0, 0), "裁判の結果:\n起きた裁判の数:%2d,勝訴:%2d,敗訴:%2d");
+
+	////if(Tiar.GetTiarlCount()>14)
+	// {
+	//DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****【免許停止】*****");
+	// }
+	//else if(Tiar.GetTiarlCount()>7)
+	//{
+	// DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****【ブロンズ免許】*****");
+	//}
+	//else if(Tiar.GetTiarlCount()>5)
+	//{
+	// DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****【シルバー免許】*****");
+	// }
+	// else if(Tiar.GetTiarlCount()>3)
+	// {
+	// DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****【プチゴールド免許】*****");
+	// }
+	// else if(Tiar.GetTiarlCount()==0)
+	// {
+	// DrawFormatString(180, 380, GetColor(0, 0, 0), "\t*****【ゴールド免許】*****");
+	//}
+}
 //終了時処理
 void ResultScene::Finalize()
 {
