@@ -2,6 +2,7 @@
 #include"SceneBase.h"
 #include"../Object/Player.h"
 #include"../Object/Enemy.h"
+#include "../Object/Trial.h"
 #include"Charges.h"
 #include"../Object/Trial.h"
 
@@ -14,9 +15,12 @@ private:
 	int mileage;
 	int enemy_image[ENEMY_NUM];
 	int enemy_count[ENEMY_NUM];
+	bool hit;
+
 	Player* player;
 	Enemy** enemy;
 	Charges* charges;
+	Trial* trial;
 
 public:
 	GameMainScene();
