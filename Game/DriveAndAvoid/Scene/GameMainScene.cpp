@@ -108,16 +108,16 @@ eSceneType GameMainScene::Update()
 					//リムジンじゃなかったら
 					if (enemy[i]->GetType() != 3) {
 						charges->HitCount();//裁判回数加算
+						trial = new Trial();
+						trial->Initilize(enemy[i]->GetType());
+						hit = true;
 					}
 					//リムジンだったら即死刑
 					else {
 						charges->SetChargesFlg(true);
+						charges->SetType(3);
 					}
-
-					trial = new Trial();
-					trial->Initilize(enemy[i]->GetType());
-
-					hit = true;
+					charges->Rand();
 					player->SetActive(false);
 					enemy[i]->Finalize();
 					delete enemy[i];
@@ -134,8 +134,6 @@ eSceneType GameMainScene::Update()
 		{
 			return eSceneType::E_RESULT;
 		}
-		
-
 
 		return GetNowScene();
 	}
@@ -148,9 +146,10 @@ eSceneType GameMainScene::Update()
 			if (player->GetHp() < 1000)
 			{
 				player->DecreaseHp(50.f);
+				player->IncreaseFuel(50.0f);
 				if (player->GetHp() > 1000)
 				{
-					
+					player->SetHp();
 				}
 			}
 			mileage += 100;
@@ -213,12 +212,6 @@ void GameMainScene::Draw() const
 		DrawFormatString(510, 240, GetColor(0, 0, 0), "スピード");
 		DrawFormatString(555, 260, GetColor(255, 255, 255), "%08.1f", player->GetSpeed());
 
-		//バリア枚数の描画
-		for (int i = 0; i < player->GetBarrierCount(); i++)
-		{
-			DrawRotaGraph(520 + i * 25, 340, 0.2f, 0, barrier_image, TRUE, FALSE);
-		}
-
 		//燃料ゲージの描画
 		float fx = 510.0f;
 		float fy = 390.0f;
@@ -243,6 +236,8 @@ void GameMainScene::Draw() const
 //終了時処理
 void GameMainScene::Finalize()
 {
+	RankingData data;
+
 	if (charges->GetChargesFlg()) {
 		mileage = 0;
 		for (int i = 0; i < ENEMY_NUM; i++) {
@@ -269,8 +264,12 @@ void GameMainScene::Finalize()
 		throw("Resource / dat / result_data.csvが開けません");
 	}
 
-	//スコアの保存
-	fprintf(fp, "%d\n", score);
+	//データの５番目(1番低いスコア)と現在のスコアを比較して、現在のスコアが高ければ保存。じゃなければ保存しない
+	if (data.GetScore(5) < score)
+	{
+		//スコアの保存
+		fprintf(fp, "%d\n", score);
+	}
 
 	//避けた数と得点の保存
 	for (int i = 0; i < ENEMY_NUM; i++)
@@ -281,9 +280,13 @@ void GameMainScene::Finalize()
 	//ファイルクローズ
 	fclose(fp);
 
+	//裁判受けた数を変数に保存
+	JudgeCount = (int)charges->GetTiralCount();
+
 	//動的確保したオブジェクトを削除する
 	player->Finallize();
 	delete player;
+
 
 	charges->Finalize();
 	delete charges;
@@ -340,4 +343,12 @@ bool GameMainScene::IsHitCheck(Player* p, Enemy* e)
 
 	//コリジョンデータより位置情報の差分が小さいならヒット
 	return ((fabsf(diff_location.x) < box_ex.x) && (fabsf(diff_location.y) < box_ex.y));
+}
+
+// 仮の初期化
+int GameMainScene::JudgeCount = 0;  
+
+//裁判の数を保存する関数
+const int GameMainScene::GetTiarl() {
+	return JudgeCount;
 }

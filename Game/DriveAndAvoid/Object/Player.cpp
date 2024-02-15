@@ -38,6 +38,9 @@ void Player::Initialize()
 //更新処理
 void Player::Update()
 {
+	if (this->hp > 1000) {
+		this->hp = 1000;
+	}
 
 	//操作不可状態であれば、自身を回転させる
 	if (!is_active)
@@ -59,6 +62,7 @@ void Player::Update()
 
 	//加減速処理
 	Acceleration();
+
 
 	if (InputControl::GetButtonDown(XINPUT_BUTTON_START))
 	{
@@ -119,6 +123,11 @@ void Player::DecreaseHp(float value)
 {
 	this->hp += value;
 }
+//燃料回復処理
+void Player::IncreaseFuel(int value)
+{
+	this->fuel += value;
+}
 
 //位置情報取得処理
 Vector2D Player::GetLocation() const
@@ -150,6 +159,11 @@ float Player::GetHp() const
 	return this->hp;
 }
 
+void Player::SetHp() 
+{
+	this->hp = 1000;
+}
+
 //バリア枚数取得処理
 int Player::GetBarrierCount() const
 {
@@ -168,21 +182,21 @@ void Player::Movement()
 	Vector2D move = Vector2D(0.0f);
 	angle = 0.0f;
 
-	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_LEFT)|| InputControl::GetLeftStick().x < -0.3f)
+	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_LEFT)|| InputControl::GetLeftStick().x < -0.5f)
 	{
 		move += Vector2D(-5.0f, 0.0f);
 		angle = -DX_PI_F / 18;
 	}
-	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_RIGHT)|| InputControl::GetLeftStick().x > 0.3f)
+	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_RIGHT)|| InputControl::GetLeftStick().x > 0.5f)
 	{
 		move += Vector2D(5.0f, 0.0f);
 		angle = DX_PI_F / 18;
 	}
-	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_UP)|| InputControl::GetLeftStick().y > 0.3f)
+	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_UP)|| InputControl::GetLeftStick().y > 0.5f)
 	{
 		move += Vector2D(0.0f, -5.0f);
 	}
-	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_DOWN)|| InputControl::GetLeftStick().y < -0.3f)
+	if (InputControl::GetButton(XINPUT_BUTTON_DPAD_DOWN)|| InputControl::GetLeftStick().y < -0.5f)
 	{
 		move += Vector2D(0.0f, 5.0f);
 	}
